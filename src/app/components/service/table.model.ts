@@ -3,7 +3,7 @@ export interface ITableColumn {
   key: string;
   type?: TableCellTypeEnum,
   sort?: boolean;
-  filter?: boolean;
+  filter?: TableFilterTypeEnum;
 }
 
 

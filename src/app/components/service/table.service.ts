@@ -4,7 +4,7 @@ import { MatSort } from "@angular/material/sort";
 import { MatTableDataSource } from "@angular/material/table";
 import { BehaviorSubject, Subscription } from "rxjs";
 import { TableFilterService } from "./table-filter.service";
-import { ITableCell, ITableFilter, ITableFilterValue, TableCellAdapter } from "./table.model";
+import { ITableCell, ITableColumn, ITableFilter, ITableFilterValue, TableCellAdapter, TableDateFilter, TableFilterTypeEnum, TableOptionsFilter, TableSearchOptionFilter } from "./table.model";
 
 
 @Injectable()
@@ -47,12 +47,35 @@ export class TableService<T> implements OnDestroy {
     }));
   }
 
-  /**
-   * setting all usable filter object for all columns
-   */
-  setFiltersOptions(filters: ITableFilter<ITableFilterValue>[]) {
-    this.filterService.filtersOptions$.next(filters);
+  setFilters(columns: ITableColumn[]) {
+    const filters = columns
+      .filter(col => !!col.filter)
+      .map(col => {
+        switch (col.filter) {
+          case TableFilterTypeEnum.DATE:
+            return new TableDateFilter({
+              key: col.key
+            });
+          case TableFilterTypeEnum.TEXT:
+            return new TableSearchOptionFilter({
+              key: col.key
+            });
+          case TableFilterTypeEnum.SEARCHOPTIONS:
+            return new TableSearchOptionFilter({
+              key: col.key
+            });
+          case TableFilterTypeEnum.OPTIONS:
+            return new TableOptionsFilter({
+              key: col.key
+            });
 
+          default:
+            return new TableSearchOptionFilter({
+              key: col.key
+            });
+        }
+      });
+    this.filterService.filtersOptions$.next(filters);
   }
 
 

@@ -6,6 +6,7 @@ import { AppRoutingModule } from 'src/app/app-routing.module';
 import { TableCellService } from '../service/table-cell.service';
 import { TableFilterService } from '../service/table-filter.service';
 import { TableService } from '../service/table.service';
+import { TableFilterModule } from './filters/table-filter.module';
 import { TableMaterialModule } from './material/table-material.module';
 import { MapPipe } from './pipe/map.pipe';
 import { TableComponent } from './table.component';
@@ -19,7 +20,8 @@ import { TableComponent } from './table.component';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    TableMaterialModule
+    TableMaterialModule,
+    TableFilterModule
   ],
   exports: [
     TableComponent

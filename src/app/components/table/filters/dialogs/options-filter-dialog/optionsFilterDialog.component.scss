@@ -1,0 +1,46 @@
+.mat-form-field {
+	width: 200px;
+	//margin: 0 5px;
+}
+
+mat-datepicker-toggle {
+	display: inline-block;
+}
+
+
+:host {
+	display: block;
+	background: white;
+
+
+	mat-selection-list {
+		padding: 10px;
+		max-height: 350px;
+		overflow-y: scroll;
+		text-align: left;
+
+	}
+
+	mat-form-field {
+		width: 100%;
+	}
+
+	.selection-container {
+		text-align: left;
+
+		>mat-label {
+			width: calc(100% - 60px);
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			padding-left: 26px;
+			padding-right: 34px;
+			height: 40px;
+			margin-top: 10px;
+
+			mat-checkbox {
+				//margin-right: 12px;
+			}
+		}
+	}
+}

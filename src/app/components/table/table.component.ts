@@ -57,12 +57,16 @@ export class TableComponent implements OnInit, AfterViewInit, OnChanges {
     if (changes['data']) {
       this.updateData();
     }
+    //if
   }
 
   updateData() {
     this.tableService.updateDataSource(this.data);
   }
 
+  updateFilters() {
+    this.tableService.setFilters(this.columns);
+  }
   /**
    * sort functions
    */
