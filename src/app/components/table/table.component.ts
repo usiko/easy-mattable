@@ -40,6 +40,8 @@ export class TableComponent implements OnInit, AfterViewInit, OnChanges {
 
     this.updateFilters();
 
+    this.tableService.initDataSource();
+
   }
 
   ngAfterViewInit() {
