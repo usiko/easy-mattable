@@ -1,15 +1,16 @@
-import { Component } from '@angular/core';
-import { ITableColumn } from './components/service/table.model';
+import { Component, OnInit } from '@angular/core';
+import * as moment from 'moment';
+import { ITableColumn, TableCellTypeEnum } from './components/service/table.model';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'mattable';
 
-  public mock: any[] = [
+  public mockbase: any[] = [
     { position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H' },
     { position: 2, name: 'Helium', weight: 4.0026, symbol: 'He' },
     { position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li' },
@@ -32,7 +33,15 @@ export class AppComponent {
     { position: 20, name: 'Calcium', weight: 40.078, symbol: 'Ca' },
   ];
 
+  public mock: any[] = [];
+
   public columns: ITableColumn[] = [
+    {
+      label: 'Date',
+      key: 'date',
+      type: TableCellTypeEnum.DATE,
+      sort: true
+    },
     {
       label: 'Postion',
       key: 'position',
@@ -51,4 +60,13 @@ export class AppComponent {
       key: 'symbol'
     }
   ];
+
+  ngOnInit() {
+    this.mock = this.mockbase.map((item, index) => {
+      return {
+        ...item,
+        date: moment().add(index, 'day').toDate()
+      };
+    });
+  }
 }

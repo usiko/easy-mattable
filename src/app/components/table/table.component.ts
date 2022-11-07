@@ -2,8 +2,10 @@ import { AfterViewInit, Component, Input, OnChanges, OnInit, SimpleChanges, View
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import * as moment from 'moment';
 import { BehaviorSubject } from 'rxjs';
-import { ITableCell, ITableCellValue, ITableColumn, TableFilterTypeEnum } from '../service/table.model';
+import { TableCellService } from '../service/table-cell.service';
+import { ITableCell, ITableCellValue, ITableColumn, TableCellTypeEnum, TableCellValue, TableFilterTypeEnum } from '../service/table.model';
 import { TableService } from '../service/table.service';
 
 
@@ -22,7 +24,7 @@ export class TableComponent implements OnInit, AfterViewInit, OnChanges {
   /** Data used by the table */
   public dataSource$: BehaviorSubject<MatTableDataSource<ITableCell<any>>> = new BehaviorSubject(new MatTableDataSource());
 
-  constructor(private tableService: TableService<any>) { }
+  constructor(private tableService: TableService<any>, private tableCell: TableCellService) { }
 
   ngOnInit(): void {
     this.dataSource$ = this.tableService.dataSource$; // binding datasource
@@ -31,7 +33,9 @@ export class TableComponent implements OnInit, AfterViewInit, OnChanges {
     this.tableService.setSortingFn((data, key) => this.sorting(data, key));
 
     // we use our cell adapter
-    this.tableService.setCellAdapter((data: any[]) => this.cellAdapter(data));
+    this.tableService.setCellAdapter((data: any[]) => this.tableCell.cellAdapter(this.columns, data));
+
+
     this.updateData();
 
   }
@@ -67,7 +71,7 @@ export class TableComponent implements OnInit, AfterViewInit, OnChanges {
     const value = data[key];
     if (col) {
       switch (col.type) {
-        case TableFilterTypeEnum.DATE:
+        case TableCellTypeEnum.DATE:
           return (value?.value) ? new Date(value.value).getTime() : undefined;
 
         default:
@@ -79,40 +83,6 @@ export class TableComponent implements OnInit, AfterViewInit, OnChanges {
     }
   }
 
-  private cellAdapter(data: any[]): ITableCell<any>[] {
-    return data.map(item => {
-      const keys = Object.keys(item);
-      const value: ITableCell<any> = {};
-      for (const key of keys) {
-        value[key] = this.cellAdapterByKey(item, key);
-      }
-      return value;
-    });
-  }
 
-  /**
-   * adapte all value for each column
-   * @param data current  data
-   * @param key current column key
-   * @returns table cell value
-   */
-  private cellAdapterByKey(data: any, key: string): ITableCellValue<any> {
-    switch (key) {
-      default:
-        return this.cellDefaultKeyAdapter(data[key]);
-    }
-  }
-
-  /**
-   * default adapter calue into table cell value
-   * @param value current value
-   * @returns table cell value
-   */
-  private cellDefaultKeyAdapter(value: any): ITableCellValue<string> {
-    return {
-      value: value,
-      displayed: value
-    };
-  }
 
 }

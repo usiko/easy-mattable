@@ -1,11 +1,19 @@
 export interface ITableColumn {
   label: string;
   key: string;
-  type?: TableFilterTypeEnum,
+  type?: TableCellTypeEnum,
   sort?: boolean;
   filter?: boolean;
 }
 
+
+/**
+ * enum of type of filter
+ */
+
+export enum TableCellTypeEnum {
+  DATE = "DATE"  // will show date range dropdown
+}
 
 
 // cell

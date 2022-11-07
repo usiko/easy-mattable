@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from 'src/app/app-routing.module';
+import { TableCellService } from '../service/table-cell.service';
 import { TableFilterService } from '../service/table-filter.service';
 import { TableService } from '../service/table.service';
 import { TableMaterialModule } from './material/table-material.module';
@@ -23,6 +24,6 @@ import { TableComponent } from './table.component';
   exports: [
     TableComponent
   ],
-  providers: [TableService, TableFilterService],
+  providers: [TableService, TableFilterService, TableCellService],
 })
 export class TableModule { }
