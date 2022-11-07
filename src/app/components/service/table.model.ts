@@ -1,3 +1,13 @@
+export interface ITableColumn {
+  label: string;
+  key: string;
+  type?: TableFilterTypeEnum,
+  sort?: boolean;
+  filter?: boolean;
+}
+
+
+
 // cell
 /**
  * table cell value by key

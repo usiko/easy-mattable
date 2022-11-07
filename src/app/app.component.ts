@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ITableColumn } from './components/table/model';
+import { ITableColumn } from './components/service/table.model';
 
 @Component({
   selector: 'app-root',
