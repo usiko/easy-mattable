@@ -2,21 +2,23 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { TableModule } from './components/table/table.module';
+import { AppRoutingModule } from 'src/app/app-routing.module';
+import { TableMaterialModule } from '../material/table-material.module';
+import { TableComponent } from './table.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
+    TableComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    TableModule
+    TableMaterialModule
+  ],
+  exports: [
+    TableComponent
   ],
   providers: [],
-  bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class TableModule { }
