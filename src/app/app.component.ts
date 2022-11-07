@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as moment from 'moment';
-import { ITableColumn, TableCellTypeEnum } from './components/service/table.model';
+import { ITableColumn, TableCellTypeEnum, TableFilterTypeEnum } from './components/service/table.model';
 
 @Component({
   selector: 'app-root',
@@ -40,7 +40,8 @@ export class AppComponent implements OnInit {
       label: 'Date',
       key: 'date',
       type: TableCellTypeEnum.DATE,
-      sort: true
+      sort: true,
+      filter: TableFilterTypeEnum.DATE
     },
     {
       label: 'Postion',
@@ -57,7 +58,8 @@ export class AppComponent implements OnInit {
     },
     {
       label: 'Symbol',
-      key: 'symbol'
+      key: 'symbol',
+      filter: TableFilterTypeEnum.SEARCHOPTIONS
     }
   ];
 

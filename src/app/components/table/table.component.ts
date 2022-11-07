@@ -38,6 +38,8 @@ export class TableComponent implements OnInit, AfterViewInit, OnChanges {
 
     this.updateData();
 
+    this.updateFilters();
+
   }
 
   ngAfterViewInit() {
@@ -56,6 +58,9 @@ export class TableComponent implements OnInit, AfterViewInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['data']) {
       this.updateData();
+    }
+    if (changes['columns']) {
+      this.updateFilters();
     }
     //if
   }
