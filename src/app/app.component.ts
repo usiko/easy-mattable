@@ -35,7 +35,8 @@ export class AppComponent {
   public columns: ITableColumn[] = [
     {
       label: 'Postion',
-      key: 'position'
+      key: 'position',
+      sort: true
     },
     {
       label: 'Nom',
