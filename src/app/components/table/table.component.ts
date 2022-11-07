@@ -1,6 +1,8 @@
-import { AfterViewChecked, AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { ITableColumn } from './model';
 
 const MOCK: any[] = [
   { position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H' },
@@ -30,15 +32,51 @@ const MOCK: any[] = [
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss']
 })
-export class TableComponent implements AfterViewInit {
+export class TableComponent implements OnInit, AfterViewInit, OnChanges {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
+  @ViewChild(MatSort) sort!: MatSort;
+  @Input() columns: ITableColumn[] = [
+    {
+      label: 'Postion',
+      key: 'position'
+    },
+    {
+      label: 'Nom',
+      key: 'name'
+    },
+    {
+      label: 'Poids',
+      key: 'weight'
+    },
+    {
+      label: 'Symbol',
+      key: 'symbol'
+    }
+
+
+  ];
+  @Input() data: any[] = [];
   public dataSource = new MatTableDataSource(MOCK);
 
   constructor() { }
 
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
+  ngOnInit(): void {
+
   }
+
+  ngAfterViewInit() {
+    if (this.paginator) {
+      this.dataSource.paginator = this.paginator;
+    }
+    if (this.sort) {
+      this.dataSource.sort = this.sort;
+    }
+
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+
+  }
+
 
 }
