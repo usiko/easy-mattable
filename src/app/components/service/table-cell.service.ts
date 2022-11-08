@@ -27,8 +27,8 @@ export class TableCellService {
       return col.cellAdapter(data[key]);
     }
     switch (col?.type) {
-      case TableCellTypeEnum.DATE:
-        return this.cellDateAdapter(data[key]);
+      /*case TableCellTypeEnum.DATE:
+        return this.cellDateAdapter(data[key]);*/
       default:
         return this.cellDefaultKeyAdapter(data[key]);
     }

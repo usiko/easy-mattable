@@ -20,7 +20,8 @@
 
           </th>
         </ng-container>
-        <td mat-cell *matCellDef="let element"> {{element[col.key].displayed}} </td>
+        <td mat-cell *matCellDef="let element">
+          <app-table-cell [column]="col" [data]="element[col.key]"></app-table-cell>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="columns|map:'key';sticky:true"></tr>
