@@ -21,6 +21,8 @@ export class TableService<T> implements OnDestroy {
 
   private subscription = new Subscription();
 
+  private columns: ITableColumn[] = [];
+
 
   constructor(private filterService: TableFilterService<T>) { }
 
@@ -47,35 +49,12 @@ export class TableService<T> implements OnDestroy {
     }));
   }
 
-  setFilters(columns: ITableColumn[]) {
-    const filters = columns
-      .filter(col => !!col.filter)
-      .map(col => {
-        switch (col.filter) {
-          case TableFilterTypeEnum.DATE:
-            return new TableDateFilter({
-              key: col.key
-            });
-          case TableFilterTypeEnum.TEXT:
-            return new TableSearchOptionFilter({
-              key: col.key
-            });
-          case TableFilterTypeEnum.SEARCHOPTIONS:
-            return new TableSearchOptionFilter({
-              key: col.key
-            });
-          case TableFilterTypeEnum.OPTIONS:
-            return new TableOptionsFilter({
-              key: col.key
-            });
 
-          default:
-            return new TableSearchOptionFilter({
-              key: col.key
-            });
-        }
-      });
-    this.filterService.filtersOptions$.next(filters);
+
+  updateColums(columns: ITableColumn[]) {
+    this.columns = columns;
+    this.setFilters();
+
   }
 
 
@@ -103,6 +82,11 @@ export class TableService<T> implements OnDestroy {
   setSortingFn(fn: (data: ITableCell<any>, sortHeaderId: string) => string | number) {
     const datasource = this.dataSource$.getValue();
     datasource.sortingDataAccessor = (data: ITableCell<any>, sortHeaderId: string) => {
+
+      const col = this.columns.find(col => col.key === sortHeaderId);
+      if (col && col.sortFn) {
+        return col.sortFn(data);
+      }
       return fn(data, sortHeaderId);
     };
     this.dataSource$.next(datasource);
@@ -151,6 +135,37 @@ export class TableService<T> implements OnDestroy {
     datasource.sort = sort;
 
     this.dataSource$.next(datasource);
+  }
+
+  private setFilters() {
+    const filters = this.columns
+      .filter(col => !!col.filterType)
+      .map(col => {
+        switch (col.filterType) {
+          case TableFilterTypeEnum.DATE:
+            return new TableDateFilter({
+              key: col.key
+            });
+          case TableFilterTypeEnum.TEXT:
+            return new TableSearchOptionFilter({
+              key: col.key
+            });
+          case TableFilterTypeEnum.SEARCHOPTIONS:
+            return new TableSearchOptionFilter({
+              key: col.key
+            });
+          case TableFilterTypeEnum.OPTIONS:
+            return new TableOptionsFilter({
+              key: col.key
+            });
+
+          default:
+            return new TableSearchOptionFilter({
+              key: col.key
+            });
+        }
+      });
+    this.filterService.filtersOptions$.next(filters);
   }
 
   ngOnDestroy(): void {

@@ -23,7 +23,9 @@ export class TableCellService {
    */
   private cellAdapterByKey(columns: ITableColumn[], data: any, key: string): ITableCellValue<any> {
     const col = columns.find(item => item.key === key);
-
+    if (col && col.cellAdapter) {
+      return col.cellAdapter(data[key]);
+    }
     switch (col?.type) {
       case TableCellTypeEnum.DATE:
         return this.cellDateAdapter(data[key]);

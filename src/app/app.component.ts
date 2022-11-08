@@ -41,7 +41,7 @@ export class AppComponent implements OnInit {
       key: 'date',
       type: TableCellTypeEnum.DATE,
       sort: true,
-      filter: TableFilterTypeEnum.DATE
+      filterType: TableFilterTypeEnum.DATE
     },
     {
       label: 'Postion',
@@ -59,7 +59,7 @@ export class AppComponent implements OnInit {
     {
       label: 'Symbol',
       key: 'symbol',
-      filter: TableFilterTypeEnum.SEARCHOPTIONS
+      filterType: TableFilterTypeEnum.SEARCHOPTIONS
     }
   ];
 

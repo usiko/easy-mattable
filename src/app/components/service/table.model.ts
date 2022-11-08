@@ -3,7 +3,9 @@ export interface ITableColumn {
   key: string;
   type?: TableCellTypeEnum,
   sort?: boolean;
-  filter?: TableFilterTypeEnum;
+  sortFn?: (data: any) => string;
+  filterType?: TableFilterTypeEnum;
+  cellAdapter?: (data: any) => ITableCellValue<any>;
 }
 
 

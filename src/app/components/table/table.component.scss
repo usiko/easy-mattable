@@ -1,3 +1,10 @@
 table {
   width: 100%;
+
+  th {
+    >div {
+      display: flex;
+      align-items: center;
+    }
+  }
 }

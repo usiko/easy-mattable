@@ -36,9 +36,9 @@ export class TableComponent implements OnInit, AfterViewInit, OnChanges {
     this.tableService.setCellAdapter((data: any[]) => this.tableCell.cellAdapter(this.columns, data));
 
 
-    this.updateData();
+    this.tableService.updateDataSource(this.data);
 
-    this.updateFilters();
+    this.tableService.updateColums(this.columns);
 
     this.tableService.initDataSource();
 
@@ -59,21 +59,16 @@ export class TableComponent implements OnInit, AfterViewInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['data']) {
-      this.updateData();
+      this.tableService.updateDataSource(this.data);
     }
     if (changes['columns']) {
-      this.updateFilters();
+      this.tableService.updateColums(this.columns);
     }
-    //if
+
   }
 
-  updateData() {
-    this.tableService.updateDataSource(this.data);
-  }
 
-  updateFilters() {
-    this.tableService.setFilters(this.columns);
-  }
+
   /**
    * sort functions
    */
