@@ -1,15 +1,17 @@
-<ng-container *ngIf="column.type === types.DATE">
-
-</ng-container>
-<ng-container *ngIf="column.type === types.LINK">
-  <app-table-cell-link [data]="data"></app-table-cell-link>
-</ng-container>
-<ng-container *ngIf="column.type === types.ICON">
-  <app-table-cell-icon [data]="data"></app-table-cell-icon>
-</ng-container>
-<ng-container *ngIf="column.type === types.LONGTEXT">
-  <app-table-cell-longtext [data]="data"></app-table-cell-longtext>
-</ng-container>
-<ng-container *ngIf="!column.type">
-  <app-table-cell-text [data]="data"></app-table-cell-text>
+<ng-container *ngIf="data">
+  <ng-container *ngIf="column.type === types.DATE">
+    <app-table-cell-date [data]="data"></app-table-cell-date>
+  </ng-container>
+  <ng-container *ngIf="column.type === types.LINK">
+    <app-table-cell-link [data]="data"></app-table-cell-link>
+  </ng-container>
+  <ng-container *ngIf="column.type === types.ICON">
+    <app-table-cell-icon [data]="data"></app-table-cell-icon>
+  </ng-container>
+  <ng-container *ngIf="column.type === types.LONGTEXT">
+    <app-table-cell-longtext [data]="data"></app-table-cell-longtext>
+  </ng-container>
+  <ng-container *ngIf="!column.type">
+    <app-table-cell-text [data]="data"></app-table-cell-text>
+  </ng-container>
 </ng-container>

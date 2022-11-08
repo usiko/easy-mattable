@@ -53,7 +53,7 @@ export class TableFilterService<T> {
    */
   private dataSourceSingleFiltering(filter: ITableFilter<ITableFilterValue>, data: ITableCell<any>): boolean {
     const cellValue = data[filter.key];
-    const value = cellValue.value;
+    const value = cellValue?.value;
     // have to delete
 
     if (!filter.value?.value) {
