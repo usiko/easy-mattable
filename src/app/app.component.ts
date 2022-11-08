@@ -50,11 +50,13 @@ export class AppComponent implements OnInit {
     },
     {
       label: 'Nom',
-      key: 'name'
+      key: 'name',
+      filterType: TableFilterTypeEnum.TEXT
     },
     {
       label: 'Poids',
-      key: 'weight'
+      key: 'weight',
+      filterType: TableFilterTypeEnum.OPTIONS
     },
     {
       label: 'Symbol',

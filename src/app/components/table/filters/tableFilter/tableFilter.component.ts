@@ -95,6 +95,8 @@ export class TableFilterComponent implements OnChanges, OnInit, OnDestroy {
         top: event.clientY + 'px',
         left: event.clientX + 'px'
       },
+      closeOnNavigation: true,
+      panelClass: 'dialog-no-padding',
       data: {
         change$: subject,
         value: this.currentFilter?.value,

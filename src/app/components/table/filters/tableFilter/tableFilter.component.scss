@@ -1,29 +1,45 @@
+:root {
+  background-color: red;
+
+  ::ng-deep {
+    .dialog-no-padding {
+      opacity: 0;
+
+      mat-dialog-container {
+        padding: 0;
+      }
+    }
+  }
+}
+
 :host {
-	>div {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		height: 100%;
-		padding: 5px;
-		opacity: 0;
-		transition: opacity 350ms;
 
-		&:hover {
-			opacity: 0.5;
-		}
 
-		&.open {
-			opacity: 0.5;
-		}
+  >div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 5px;
+    opacity: 0;
+    transition: opacity 350ms;
 
-		&.active {
-			opacity: 1;
-		}
+    &:hover {
+      opacity: 0.5;
+    }
 
-		.filter-icon {
-			font-size: 17px;
-			height: 17px;
-			width: 17px;
-		}
-	}
+    &.open {
+      opacity: 0.5;
+    }
+
+    &.active {
+      opacity: 1;
+    }
+
+    .filter-icon {
+      font-size: 17px;
+      height: 17px;
+      width: 17px;
+    }
+  }
 }

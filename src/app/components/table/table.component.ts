@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -24,7 +24,8 @@ export class TableComponent implements OnInit, AfterViewInit, OnChanges {
   /** Data used by the table */
   public dataSource$: BehaviorSubject<MatTableDataSource<ITableCell<any>>> = new BehaviorSubject(new MatTableDataSource());
 
-  constructor(private tableService: TableService<any>, private tableCell: TableCellService) { }
+
+  constructor(private element: ElementRef, private tableService: TableService<any>, private tableCell: TableCellService) { }
 
   ngOnInit(): void {
     this.dataSource$ = this.tableService.dataSource$; // binding datasource
@@ -88,6 +89,8 @@ export class TableComponent implements OnInit, AfterViewInit, OnChanges {
       return data[key].value;
     }
   }
+
+
 
 
 

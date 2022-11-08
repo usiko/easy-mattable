@@ -4,7 +4,7 @@ import { MatSort } from "@angular/material/sort";
 import { MatTableDataSource } from "@angular/material/table";
 import { BehaviorSubject, Subscription } from "rxjs";
 import { TableFilterService } from "./table-filter.service";
-import { ITableCell, ITableColumn, ITableFilter, ITableFilterValue, TableCellAdapter, TableDateFilter, TableFilterTypeEnum, TableOptionsFilter, TableSearchOptionFilter } from "./table.model";
+import { ITableCell, ITableColumn, ITableFilter, ITableFilterValue, TableCellAdapter, TableDateFilter, TableFilterTypeEnum, TableOptionsFilter, TableSearchOptionFilter, TableTextFilter } from "./table.model";
 
 
 @Injectable()
@@ -147,7 +147,7 @@ export class TableService<T> implements OnDestroy {
               key: col.key
             });
           case TableFilterTypeEnum.TEXT:
-            return new TableSearchOptionFilter({
+            return new TableTextFilter({
               key: col.key
             });
           case TableFilterTypeEnum.SEARCHOPTIONS:
