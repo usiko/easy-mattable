@@ -8,6 +8,7 @@ import { TableFilterModule } from './filters';
 import { TableMaterialModule } from './material/table-material.module';
 import { MapPipe } from './pipe';
 import { TableCellService, TableFilterService, TableService } from './service';
+import { TableCSVService } from './service/table-csv.service';
 import { TableComponent } from './table.component';
 
 @NgModule({
@@ -21,11 +22,12 @@ import { TableComponent } from './table.component';
     BrowserAnimationsModule,
     TableMaterialModule,
     TableFilterModule,
-    TableCellModule
+    TableCellModule,
+
   ],
   exports: [
     TableComponent
   ],
-  providers: [TableService, TableFilterService, TableCellService],
+  providers: [TableService, TableFilterService, TableCellService, TableCSVService],
 })
 export class TableModule { }

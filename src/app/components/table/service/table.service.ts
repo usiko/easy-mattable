@@ -172,6 +172,9 @@ export class TableService<T> implements OnDestroy {
     this.filterService.filtersOptions$.next(filters);
   }
 
+
+
+
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }

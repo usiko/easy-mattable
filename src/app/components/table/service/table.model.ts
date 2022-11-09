@@ -5,7 +5,8 @@ export interface ITableColumn {
   sort?: boolean;
   sortFn?: (data: any) => string;
   filterType?: TableFilterTypeEnum;
-  cellAdapter?: (data: any) => ITableCellValue<any>;
+  cellAdapter?: (data: ITableCellValue<any>) => ITableCellValue<any>;
+  cellCSVAdapter?: (data: ITableCellValue<any>) => string;
 }
 
 
