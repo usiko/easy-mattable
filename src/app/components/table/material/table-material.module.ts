@@ -1,6 +1,7 @@
 import { NgModule } from "@angular/core";
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatIcon, MatIconModule } from "@angular/material/icon";
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
@@ -14,14 +15,14 @@ import { MatTableModule } from '@angular/material/table';
     MatSortModule,
     MatPaginatorModule,
     MatCheckboxModule,
-    MatDialogModule,
+    MatDialogModule
   ],
   exports: [
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
     MatCheckboxModule,
-    MatDialogModule,
+    MatDialogModule
   ],
   providers: [],
 })

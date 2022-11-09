@@ -7,9 +7,9 @@ import { ITableCellValue } from '../../../service';
   styleUrls: ['./table-cell-icon.component.scss']
 })
 export class TableCellIconComponent implements OnInit {
-
+  @Input() data?: ITableCellValue<string>;
   constructor() { }
-  @Input() data!: ITableCellValue<string>;
+
   ngOnInit(): void {
   }
 

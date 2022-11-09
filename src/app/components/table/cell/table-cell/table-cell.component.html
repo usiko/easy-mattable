@@ -11,6 +11,9 @@
   <ng-container *ngIf="column.type === types.LONGTEXT">
     <app-table-cell-longtext [data]="data"></app-table-cell-longtext>
   </ng-container>
+  <ng-container *ngIf="column.type === types.BOOLEAN">
+    <app-table-cell-boolean [data]="data"></app-table-cell-boolean>
+  </ng-container>
   <ng-container *ngIf="!column.type">
     <app-table-cell-text [data]="data"></app-table-cell-text>
   </ng-container>

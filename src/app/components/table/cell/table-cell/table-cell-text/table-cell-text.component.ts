@@ -8,7 +8,7 @@ import { ITableCellValue } from '../../../service';
 export class TableCellTextComponent implements OnInit {
 
   constructor() { }
-  @Input() data!: ITableCellValue<string>;
+  @Input() data?: ITableCellValue<string>;
   ngOnInit(): void {
   }
 

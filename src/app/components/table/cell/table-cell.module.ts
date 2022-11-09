@@ -6,6 +6,8 @@ import { TableCellIconComponent } from './table-cell/table-cell-icon/table-cell-
 import { TableCellLinkComponent } from './table-cell/table-cell-link/table-cell-link.component';
 import { TableCellDateComponent } from './table-cell/table-cell-date/table-cell-date.component';
 import { CommonModule } from '@angular/common';
+import { TableCellBooleanComponent } from './table-cell/table-cell-boolean/table-cell-boolean.component';
+import { MatIconModule } from '@angular/material/icon';
 
 
 @NgModule({
@@ -17,10 +19,12 @@ import { CommonModule } from '@angular/common';
     TableCellLongtextComponent,
     TableCellIconComponent,
     TableCellLinkComponent,
-    TableCellDateComponent
+    TableCellDateComponent,
+    TableCellBooleanComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    MatIconModule
   ],
   exports: [
     TableCellComponent

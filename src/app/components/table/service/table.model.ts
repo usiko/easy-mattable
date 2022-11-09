@@ -17,7 +17,8 @@ export enum TableCellTypeEnum {
   DATE = "DATE", // will adapt date
   LONGTEXT = "LONGTEXT", // will show long text
   LINK = "LINK", // will a clickable link
-  ICON = "ICON", // will a clickable link
+  ICON = "ICON", // show an icon
+  BOOLEAN = "BOOLEAN", // shwo boolea value
 }
 
 
