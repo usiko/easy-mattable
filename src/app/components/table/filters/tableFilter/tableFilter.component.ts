@@ -5,8 +5,8 @@ import { MatTableDataSource } from "@angular/material/table";
 import { Subject, Subscription } from "rxjs";
 import { take } from "rxjs/operators";
 import { ITableCell, ITableFilter, ITableFilterDateValue, ITableFilterOptionsValue, ITableFilterTextValue, ITableFilterValue, TableFilterTypeEnum } from "../../";
-import { TableService } from "../../service";
-import { TextFilterDialog, DateFilterDialog, OptionsFilterDialog } from "../dialogs";
+import { ITableFilterBooleanValue, TableService } from "../../service";
+import { TextFilterDialog, DateFilterDialog, OptionsFilterDialog, BooleanFilterDialogComponent } from "../dialogs";
 
 
 
@@ -122,6 +122,8 @@ export class TableFilterComponent implements OnChanges, OnInit, OnDestroy {
       case TableFilterTypeEnum.OPTIONS:
       case TableFilterTypeEnum.SEARCHOPTIONS:
         return OptionsFilterDialog;
+      case TableFilterTypeEnum.BOOLEANOPTIONS:
+        return BooleanFilterDialogComponent;
       default:
         return TextFilterDialog;
     }
@@ -149,6 +151,12 @@ export class TableFilterComponent implements OnChanges, OnInit, OnDestroy {
           optionValue.value = undefined;
         }
         return optionValue;
+      case TableFilterTypeEnum.BOOLEANOPTIONS:
+        const booleanValue: ITableFilterBooleanValue = value;
+        if (booleanValue.value && booleanValue.value.length === 0) {
+          booleanValue.value = undefined;
+        }
+        return booleanValue;
 
       case TableFilterTypeEnum.DATE:
         const dateValue: ITableFilterDateValue = value;

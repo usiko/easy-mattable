@@ -1,0 +1,44 @@
+mat-datepicker-toggle {
+  display: inline-block;
+}
+
+
+:host {
+  display: block;
+  background: white;
+
+
+  mat-selection-list {
+    padding: 10px;
+    max-height: 350px;
+    overflow-y: scroll;
+    text-align: left;
+
+  }
+
+
+  .selection-container {
+    text-align: left;
+
+    .displayed-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    >mat-label {
+      width: calc(100% - 60px);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-left: 26px;
+      padding-right: 34px;
+      height: 40px;
+      margin-top: 10px;
+
+      mat-checkbox {
+        //margin-right: 12px;
+      }
+    }
+  }
+}

@@ -126,6 +126,20 @@ export interface ITableFilterOptionsValue extends ITableFilterValue {
   options?: ITableCellValue<any>[];
 }
 
+
+/**
+ * filter boolean options
+ */
+export interface ITableFilterBooleanValue extends ITableFilterValue {
+  type: TableFilterTypeEnum;
+  value?: (boolean | undefined)[];
+
+  /**
+   * selectable option
+   */
+  options?: ITableCellValue<(boolean | undefined)>[];
+}
+
 /**
  * filter text options
  */
@@ -143,6 +157,7 @@ export interface ITableFilterTextValue extends ITableFilterValue {
 export enum TableFilterTypeEnum {
   TEXT = "text", // will show a search text dropdown
   OPTIONS = "options",  // will show a selection list dropdown
+  BOOLEANOPTIONS = "boolean options",  // will show  true fall undefined selection
   SEARCHOPTIONS = "searchoptions",  // will show a selection list dropdown with search
   DATE = "DATE"  // will show date range dropdown
 }
@@ -199,7 +214,7 @@ export class TableTextFilter extends TableFilter<ITableFilterTextValue> implemen
 }
 
 /**
- * table filter text, that will show an a list option selection on column header to filter your data
+ * table filter option, that will show an a list option selection on column header to filter your data
  */
 export class TableOptionsFilter extends TableFilter<ITableFilterOptionsValue> implements ITableFilter<ITableFilterOptionsValue>
 {
@@ -220,13 +235,40 @@ export class TableOptionsFilter extends TableFilter<ITableFilterOptionsValue> im
 }
 
 /**
- * table filter text, that will show an a searchable list option selection on column header to filter your data
+ * table filter search option, that will show an a searchable list option selection on column header to filter your data
  */
 export class TableSearchOptionFilter extends TableFilter<ITableFilterOptionsValue> implements ITableFilter<ITableFilterOptionsValue>
 {
   constructor(options: ITableFilter<ITableFilterOptionsValue>) {
     super(options);
     this.value.type = TableFilterTypeEnum.SEARCHOPTIONS;
+  }
+}
+
+
+/**
+ * table filter boolean, that will show an a boolean list option selection on column header to filter your data
+ */
+export class TableBooleanOptionFilter extends TableFilter<ITableFilterBooleanValue> implements ITableFilter<ITableFilterBooleanValue>
+{
+  constructor(options: ITableFilter<ITableFilterBooleanValue>) {
+    super(options);
+    this.value.type = TableFilterTypeEnum.BOOLEANOPTIONS;
+    this.value.options = [
+      new TableCellValue({
+        value: true,
+        displayed: 'oui'
+      }),
+      new TableCellValue({
+        value: false,
+        displayed: 'non'
+      }),
+      new TableCellValue({
+        value: undefined,
+        displayed: 'non défini'
+      })
+
+    ];
   }
 }
 
