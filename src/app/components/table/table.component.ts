@@ -83,11 +83,11 @@ export class TableComponent implements OnInit, AfterViewInit, OnChanges {
           return (value?.value) ? new Date(value.value).getTime() : undefined;
 
         default:
-          return data[key].value;
+          return value?.value;
       }
     }
     else {
-      return data[key].value;
+      return value?.value;
     }
   }
 

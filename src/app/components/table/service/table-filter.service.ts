@@ -81,9 +81,9 @@ export class TableFilterService<T> {
     return dataSource.data.reduce((acc: ITableCellValue<any>[], item) => {
       const itemValue = item[key];
       const findIndex = acc.findIndex(item => {
-        return item.value === itemValue.value;
+        return itemValue && item && item.value === itemValue.value;
       });
-      if (findIndex === -1) {
+      if (findIndex === -1 && itemValue) {
         acc.push(new TableCellValue(itemValue));
       }
       return acc;
