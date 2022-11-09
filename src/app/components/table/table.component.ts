@@ -4,9 +4,9 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import * as moment from 'moment';
 import { BehaviorSubject } from 'rxjs';
-import { TableCellService } from '../service/table-cell.service';
-import { ITableCell, ITableCellValue, ITableColumn, TableCellTypeEnum, TableCellValue, TableFilterTypeEnum } from '../service/table.model';
-import { TableService } from '../service/table.service';
+import { TableCellService } from './service/table-cell.service';
+import { ITableCell, ITableCellValue, ITableColumn, TableCellTypeEnum, TableCellValue, TableFilterTypeEnum } from './service/table.model';
+import { TableService } from './service/table.service';
 
 
 
@@ -21,6 +21,7 @@ export class TableComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() columns: ITableColumn[] = [
   ];
   @Input() data: any[] = [];
+  @Input() pageSizeOptions: number[] = [];
   /** Data used by the table */
   public dataSource$: BehaviorSubject<MatTableDataSource<ITableCell<any>>> = new BehaviorSubject(new MatTableDataSource());
 
