@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ITableCell, ITableCellValue, ITableColumn, TableCellTypeEnum } from 'src/app/components/table/service/table.model';
+import { ITableCellValue, ITableColumn, TableCellTypeEnum } from '../..';
+
 
 @Component({
   selector: 'app-table-cell',

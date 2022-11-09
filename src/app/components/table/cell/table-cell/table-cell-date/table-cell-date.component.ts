@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ITableCellValue } from 'src/app/components/table/service/table.model';
+import { ITableCellValue } from '../../../service';
 
 @Component({
   selector: 'app-table-cell-date',

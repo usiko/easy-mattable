@@ -3,13 +3,11 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from 'src/app/app-routing.module';
-import { TableCellService } from './service/table-cell.service';
-import { TableFilterService } from './service/table-filter.service';
-import { TableService } from './service/table.service';
-import { TableCellModule } from './cell/table-cell.module';
-import { TableFilterModule } from './filters/table-filter.module';
+import { TableCellModule } from './cell';
+import { TableFilterModule } from './filters';
 import { TableMaterialModule } from './material/table-material.module';
-import { MapPipe } from './pipe/map.pipe';
+import { MapPipe } from './pipe';
+import { TableCellService, TableFilterService, TableService } from './service';
 import { TableComponent } from './table.component';
 
 @NgModule({

@@ -1,7 +1,7 @@
 import { Component, Inject } from "@angular/core";
 import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { Subject } from "rxjs";
-import { ITableFilterTextValue } from "src/app/components/table/service/table.model";
+import { ITableFilterTextValue } from "../../../service";
 import { FilterDialog } from "../filter-dialog";
 
 
