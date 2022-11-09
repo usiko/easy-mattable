@@ -2,10 +2,10 @@ import { AfterViewInit, Component, ElementRef, Input, OnChanges, OnInit, SimpleC
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import * as moment from 'moment';
 import { BehaviorSubject } from 'rxjs';
 import { TableCellService } from './service/table-cell.service';
-import { ITableCell, ITableCellValue, ITableColumn, TableCellTypeEnum, TableCellValue, TableFilterTypeEnum } from './service/table.model';
+import { TableCSVService } from './service/table-csv.service';
+import { ITableCell, ITableColumn, TableCellTypeEnum } from './service/table.model';
 import { TableService } from './service/table.service';
 
 
@@ -22,11 +22,12 @@ export class TableComponent implements OnInit, AfterViewInit, OnChanges {
   ];
   @Input() data: any[] = [];
   @Input() pageSizeOptions: number[] = [];
+  @Input() exportable: boolean = false;
   /** Data used by the table */
   public dataSource$: BehaviorSubject<MatTableDataSource<ITableCell<any>>> = new BehaviorSubject(new MatTableDataSource());
 
 
-  constructor(private element: ElementRef, private tableService: TableService<any>, private tableCell: TableCellService) { }
+  constructor(private tableService: TableService<any>, private tableCell: TableCellService, private tableCSV: TableCSVService) { }
 
   ngOnInit(): void {
     this.dataSource$ = this.tableService.dataSource$; // binding datasource
@@ -91,6 +92,16 @@ export class TableComponent implements OnInit, AfterViewInit, OnChanges {
     }
   }
 
+
+  exportcsv(): void {
+    const csv = this.tableCSV.getCSV(this.columns, this.dataSource$.getValue().filteredData);
+
+    let hiddenElement = document.createElement('a');
+    hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
+    hiddenElement.target = '_blank';
+    hiddenElement.download = 'data.csv';
+    hiddenElement.click();
+  }
 
 
 

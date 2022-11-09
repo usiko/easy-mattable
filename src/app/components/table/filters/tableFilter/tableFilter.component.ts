@@ -111,6 +111,19 @@ export class TableFilterComponent implements OnChanges, OnInit, OnDestroy {
   }
 
   /**
+   * reset filter
+   */
+  resetFilter(event: MouseEvent) {
+    event.preventDefault();
+    event.stopPropagation();
+    if (this.currentFilter) {
+      this.currentFilter.value = undefined;
+    }
+
+    this.tableService.getFilters().next(this.tableService.getFilters().getValue());
+  }
+
+  /**
    * getting dialog component from filter type
    */
   private getDialogComponent() {

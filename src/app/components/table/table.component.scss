@@ -9,10 +9,22 @@
     display: flex;
     flex-direction: column;
 
+    .bottom {
+      display: flex;
+      justify-content: space-between;
+
+      mat-paginator {
+        align-self: flex-end;
+        width: 100%;
+      }
+    }
+
     .table-container {
       height: 100%;
       max-width: 100%;
       overflow: auto;
+
+
 
       table {
         width: 100%;
