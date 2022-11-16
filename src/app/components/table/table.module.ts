@@ -26,6 +26,6 @@ import { TableComponent } from './table.component';
   exports: [
     TableComponent
   ],
-  providers: [TableService, TableFilterService, TableCellService],
+  providers: [],
 })
 export class TableModule { }

@@ -7,13 +7,14 @@ import { BehaviorSubject } from 'rxjs';
 import { TableCellService } from '../service/table-cell.service';
 import { ITableCell, ITableCellValue, ITableColumn, TableCellTypeEnum, TableCellValue, TableFilterTypeEnum } from '../service/table.model';
 import { TableService } from '../service/table.service';
-
-
+import { TableCellService } from '../service/table-cell.service';
+import { TableFilterService } from '../service/table-filter.service';
 
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
-  styleUrls: ['./table.component.scss']
+  styleUrls: ['./table.component.scss'],
+  providers:[TableService, TableFilterService, TableCellService]
 })
 export class TableComponent implements OnInit, AfterViewInit, OnChanges {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
