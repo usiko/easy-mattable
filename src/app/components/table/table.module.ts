@@ -10,22 +10,12 @@ import { TableFilterModule } from './filters/table-filter.module';
 import { TableMaterialModule } from './material/table-material.module';
 import { MapPipe } from './pipe/map.pipe';
 import { TableComponent } from './table.component';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
-  declarations: [
-    TableComponent,
-    MapPipe
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    TableMaterialModule,
-    TableFilterModule
-  ],
-  exports: [
-    TableComponent
-  ],
-  providers: [],
+	declarations: [TableComponent, MapPipe],
+	imports: [CommonModule, TableMaterialModule, TableFilterModule, TableCellModule],
+	exports: [TableComponent],
+	providers: [],
 })
-export class TableModule { }
+export class TableModule {}
