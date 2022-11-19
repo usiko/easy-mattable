@@ -10,24 +10,12 @@ import { MapPipe } from './pipe';
 import { TableCellService, TableFilterService, TableService } from './service';
 import { TableCSVService } from './service/table-csv.service';
 import { TableComponent } from './table.component';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
-  declarations: [
-    TableComponent,
-    MapPipe
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    TableMaterialModule,
-    TableFilterModule,
-    TableCellModule,
-
-  ],
-  exports: [
-    TableComponent
-  ],
-  providers: [TableService, TableFilterService, TableCellService, TableCSVService],
+    declarations: [TableComponent, MapPipe],
+    imports: [CommonModule, TableMaterialModule, TableFilterModule, TableCellModule],
+    exports: [TableComponent],
+    providers: [],
 })
 export class TableModule { }
