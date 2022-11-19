@@ -1,7 +1,7 @@
 import { Injectable, OnDestroy, OnInit } from "@angular/core";
 import { Subject, Subscription } from "rxjs";
 import { debounceTime } from "rxjs/operators";
-import { ITableFilterValue } from "src/app/components/service/table.model";
+import { ITableFilterValue } from "../../service";
 
 
 @Injectable()

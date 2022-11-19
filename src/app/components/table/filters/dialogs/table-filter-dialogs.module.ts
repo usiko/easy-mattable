@@ -5,12 +5,13 @@ import { TableFilterMaterialModule } from '../material/table-filter-material.mod
 import { DateFilterDialog } from './date-filter-dialog/dateFilterDialog.component';
 import { OptionsFilterDialog } from './options-filter-dialog/optionsFilterDialog.component';
 import { TextFilterDialog } from './text-filter-dialog/textFilterDialog.component';
+import { BooleanFilterDialogComponent } from './boolean-filter-dialog/boolean-filter-dialog.component';
 
 
 
 
 @NgModule({
-  declarations: [DateFilterDialog, TextFilterDialog, OptionsFilterDialog],
+  declarations: [DateFilterDialog, TextFilterDialog, OptionsFilterDialog, BooleanFilterDialogComponent],
   imports: [
     CommonModule,
     FormsModule,

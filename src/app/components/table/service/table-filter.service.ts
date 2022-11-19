@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { MatTableDataSource } from "@angular/material/table";
 import * as moment from "moment";
 import { BehaviorSubject } from "rxjs";
-import { ITableCell, ITableCellValue, ITableFilter, ITableFilterDateValue, ITableFilterOptionsValue, ITableFilterTextValue, ITableFilterValue, TableCellValue, TableFilterTypeEnum } from "./table.model";
+import { ITableCell, ITableCellValue, ITableFilter, ITableFilterBooleanValue, ITableFilterDateValue, ITableFilterOptionsValue, ITableFilterTextValue, ITableFilterValue, TableCellValue, TableFilterTypeEnum } from "./table.model";
 
 @Injectable()
 export class TableFilterService<T> {
@@ -53,7 +53,7 @@ export class TableFilterService<T> {
    */
   private dataSourceSingleFiltering(filter: ITableFilter<ITableFilterValue>, data: ITableCell<any>): boolean {
     const cellValue = data[filter.key];
-    const value = cellValue.value;
+    const value = cellValue?.value;
     // have to delete
 
     if (!filter.value?.value) {
@@ -66,6 +66,8 @@ export class TableFilterService<T> {
       case TableFilterTypeEnum.OPTIONS:
       case TableFilterTypeEnum.SEARCHOPTIONS:
         return this.optionFilter(filter.value, value);
+      case TableFilterTypeEnum.BOOLEANOPTIONS:
+        return this.booleanFilter(filter.value, value);
       case TableFilterTypeEnum.TEXT:
         return this.textFilter(filter.value, value);
 
@@ -81,9 +83,9 @@ export class TableFilterService<T> {
     return dataSource.data.reduce((acc: ITableCellValue<any>[], item) => {
       const itemValue = item[key];
       const findIndex = acc.findIndex(item => {
-        return item.value === itemValue.value;
+        return itemValue && item && item.value === itemValue.value;
       });
-      if (findIndex === -1) {
+      if (findIndex === -1 && itemValue) {
         acc.push(new TableCellValue(itemValue));
       }
       return acc;
@@ -121,6 +123,20 @@ export class TableFilterService<T> {
         }
 
         return filter;
+      case TableFilterTypeEnum.BOOLEANOPTIONS:
+        const booleanFilter: ITableFilterBooleanValue = JSONparsedFilterValue;
+
+
+        if (booleanFilter.value) {
+          booleanFilter.value = booleanFilter.value.map(filterValue => {
+            if (filterValue !== true && filterValue !== false) {
+              return undefined;
+            }
+            return filterValue;
+          });
+
+        }
+        return booleanFilter;
 
       default:
         return JSONparsedFilterValue;
@@ -155,6 +171,21 @@ export class TableFilterService<T> {
    */
   private optionFilter(filter: ITableFilterOptionsValue, search: string): boolean {
     return filter.value?.length == 0 || filter.value?.includes(search) || false;
+  }
+  /**
+   * filtering by boolean selection
+   */
+  private booleanFilter(filter: ITableFilterBooleanValue, search: any): boolean {
+
+    let value = undefined;
+    if (search === true) {
+      value = true;
+    }
+    if (search === false) {
+      value = false;
+    }
+    console.log(value, filter.value);
+    return filter.value?.length == 0 || filter.value?.includes(value) || false;
   }
 
   /**

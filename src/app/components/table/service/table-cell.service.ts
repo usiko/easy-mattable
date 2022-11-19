@@ -23,10 +23,14 @@ export class TableCellService {
    */
   private cellAdapterByKey(columns: ITableColumn[], data: any, key: string): ITableCellValue<any> {
     const col = columns.find(item => item.key === key);
-
+    if (col && col.cellAdapter) {
+      return col.cellAdapter(data[key]);
+    }
     switch (col?.type) {
-      case TableCellTypeEnum.DATE:
-        return this.cellDateAdapter(data[key]);
+      /*case TableCellTypeEnum.DATE:
+        return this.cellDateAdapter(data[key]);*/
+      case TableCellTypeEnum.BOOLEAN:
+        return this.cellBooleanAdapter(data[key]);
       default:
         return this.cellDefaultKeyAdapter(data[key]);
     }
@@ -51,5 +55,21 @@ export class TableCellService {
  */
   private cellDateAdapter(value: Date): ITableCellValue<Date> {
     return new TableCellValue({ value, displayed: moment(value).format('DD/MM/YYYY HH:mm') });
+  }
+  /**
+ * adapte boolean column value into a date table cell value
+ * @param value current value
+ * @returns table cell value
+ */
+  private cellBooleanAdapter(value: boolean): ITableCellValue<boolean | undefined> {
+    let displayed: string = 'non défini';
+    if (value === true) {
+      return new TableCellValue({ value, displayed: 'oui' });
+    }
+    if (value === false) {
+      return new TableCellValue({ value, displayed: 'non' });
+    }
+    return new TableCellValue({ value: undefined, displayed: 'non défini' });
+
   }
 }

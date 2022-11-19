@@ -1,4 +1,4 @@
 <div *ngIf="currentFilter" [class.active]="currentFilter && currentFilter.value  && currentFilter.value.value"
-	[class.open]="dialogOpen" (click)="openFilter($event)">
-	<mat-icon class="filter-icon">filter_list</mat-icon>
+  [class.open]="dialogOpen" (click)="openFilter($event)" (dblclick)="resetFilter($event)">
+  <mat-icon class="filter-icon">filter_list</mat-icon>
 </div>

@@ -1,16 +1,11 @@
 import { NgModule } from "@angular/core";
+import { MatButtonModule } from "@angular/material/button";
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatIcon, MatIconModule } from "@angular/material/icon";
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
-import { MatTooltipModule } from '@angular/material/tooltip';
-import { MatInputModule } from '@angular/material/input';
-import { MatListModule } from '@angular/material/list';
-import { MatIconModule } from '@angular/material/icon';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -22,6 +17,8 @@ import { MatButtonModule } from '@angular/material/button';
     MatPaginatorModule,
     MatCheckboxModule,
     MatDialogModule,
+    MatButtonModule,
+    MatIconModule
   ],
   exports: [
     MatTableModule,
@@ -29,6 +26,8 @@ import { MatButtonModule } from '@angular/material/button';
     MatPaginatorModule,
     MatCheckboxModule,
     MatDialogModule,
+    MatButtonModule,
+    MatIconModule
   ],
   providers: [],
 })

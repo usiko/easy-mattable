@@ -1,10 +1,8 @@
 import { Component, Inject, OnInit } from "@angular/core";
-import { FormControl, FormGroup } from "@angular/forms";
 import { MAT_DIALOG_DATA } from "@angular/material/dialog";
-import { MatSelectionListChange } from "@angular/material/list";
 import { Subject } from "rxjs";
 import { debounceTime } from "rxjs/operators";
-import { ITableCellValue, ITableFilterOptionsValue } from "src/app/components/service/table.model";
+import { ITableCellValue, ITableFilterOptionsValue } from "../../../service";
 
 
 import { FilterDialog } from "../filter-dialog";
@@ -63,7 +61,7 @@ export class OptionsFilterDialog extends FilterDialog<ITableFilterOptionsValue> 
     /**
      * if (this.data.change$) {
       this.subscription.add(this.debouncer$.pipe(debounceTime(350)).subscribe(() => {
-        this.data.change$.next(this.data.value);
+      this.data.change$.next(this.data.value);
       }));
     }
 

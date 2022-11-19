@@ -4,11 +4,10 @@ import { MatTableDataSource } from "@angular/material/table";
 
 import { Subject, Subscription } from "rxjs";
 import { take } from "rxjs/operators";
-import { ITableCell, ITableFilter, ITableFilterValue, ITableFilterTextValue, TableFilterTypeEnum, ITableFilterOptionsValue, ITableFilterDateValue } from "src/app/components/service/table.model";
-import { TableService } from "src/app/components/service/table.service";
-import { DateFilterDialog } from "../dialogs/date-filter-dialog/dateFilterDialog.component";
-import { OptionsFilterDialog } from "../dialogs/options-filter-dialog/optionsFilterDialog.component";
-import { TextFilterDialog } from "../dialogs/text-filter-dialog/textFilterDialog.component";
+import { ITableCell, ITableFilter, ITableFilterDateValue, ITableFilterOptionsValue, ITableFilterTextValue, ITableFilterValue, TableFilterTypeEnum } from "../../";
+import { ITableFilterBooleanValue, TableService } from "../../service";
+import { TextFilterDialog, DateFilterDialog, OptionsFilterDialog, BooleanFilterDialogComponent } from "../dialogs";
+
 
 
 
@@ -95,6 +94,8 @@ export class TableFilterComponent implements OnChanges, OnInit, OnDestroy {
         top: event.clientY + 'px',
         left: event.clientX + 'px'
       },
+      closeOnNavigation: true,
+      panelClass: 'dialog-no-padding',
       data: {
         change$: subject,
         value: this.currentFilter?.value,
@@ -110,6 +111,19 @@ export class TableFilterComponent implements OnChanges, OnInit, OnDestroy {
   }
 
   /**
+   * reset filter
+   */
+  resetFilter(event: MouseEvent) {
+    event.preventDefault();
+    event.stopPropagation();
+    if (this.currentFilter) {
+      this.currentFilter.value = undefined;
+    }
+
+    this.tableService.getFilters().next(this.tableService.getFilters().getValue());
+  }
+
+  /**
    * getting dialog component from filter type
    */
   private getDialogComponent() {
@@ -121,6 +135,8 @@ export class TableFilterComponent implements OnChanges, OnInit, OnDestroy {
       case TableFilterTypeEnum.OPTIONS:
       case TableFilterTypeEnum.SEARCHOPTIONS:
         return OptionsFilterDialog;
+      case TableFilterTypeEnum.BOOLEANOPTIONS:
+        return BooleanFilterDialogComponent;
       default:
         return TextFilterDialog;
     }
@@ -148,6 +164,12 @@ export class TableFilterComponent implements OnChanges, OnInit, OnDestroy {
           optionValue.value = undefined;
         }
         return optionValue;
+      case TableFilterTypeEnum.BOOLEANOPTIONS:
+        const booleanValue: ITableFilterBooleanValue = value;
+        if (booleanValue.value && booleanValue.value.length === 0) {
+          booleanValue.value = undefined;
+        }
+        return booleanValue;
 
       case TableFilterTypeEnum.DATE:
         const dateValue: ITableFilterDateValue = value;

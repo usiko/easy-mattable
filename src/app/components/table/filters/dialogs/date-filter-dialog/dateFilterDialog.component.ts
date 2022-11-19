@@ -2,7 +2,7 @@ import { Component, Inject, OnInit } from "@angular/core";
 import { FormControl, FormGroup } from "@angular/forms";
 import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { Subject } from "rxjs";
-import { ITableFilterDateValue } from "src/app/components/service/table.model";
+import { ITableFilterDateValue } from "../../../service";
 import { FilterDialog } from "../filter-dialog";
 
 
