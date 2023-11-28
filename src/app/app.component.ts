@@ -51,7 +51,19 @@ export class AppComponent implements OnInit {
     {
       label: 'Nom',
       key: 'name',
-      filterType: TableFilterTypeEnum.TEXT
+      filterType: TableFilterTypeEnum.TEXT,
+      cellAdapter: (data: string) => {
+        console.log('regular', data);
+        const ret: ITableCellValue<string> = {
+          value: data,
+          displayed: data
+        };
+        return ret;
+      },
+      cellCSVAdapter: (data: ITableCellValue<string>) => {
+        console.log('csv', data);
+        return 'csv override';
+      }
     },
     {
       label: 'Poids',
