@@ -12,25 +12,16 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
-
-
     TableCellComponent,
     TableCellTextComponent,
     TableCellLongtextComponent,
     TableCellIconComponent,
     TableCellLinkComponent,
     TableCellDateComponent,
-    TableCellBooleanComponent,
-
+    TableCellBooleanComponent
   ],
-  imports: [
-    CommonModule,
-    MatIconModule,
-    MatTooltipModule
-  ],
-  exports: [
-    TableCellComponent
-  ],
-  providers: [],
+  imports: [CommonModule, MatIconModule, MatTooltipModule],
+  exports: [TableCellComponent],
+  providers: []
 })
-export class TableCellModule { }
+export class TableCellModule {}

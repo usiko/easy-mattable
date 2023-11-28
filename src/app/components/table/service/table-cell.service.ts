@@ -1,11 +1,18 @@
-import { Injectable } from "@angular/core";
-import * as moment from "moment";
-import { ITableCell, ITableCellValue, ITableColumn, TableCellTypeEnum, TableCellValue, TableFilterTypeEnum } from "./table.model";
+import { Injectable } from '@angular/core';
+import * as moment from 'moment';
+import {
+  ITableCell,
+  ITableCellValue,
+  ITableColumn,
+  TableCellTypeEnum,
+  TableCellValue,
+  TableFilterTypeEnum
+} from './table.model';
 
 @Injectable()
 export class TableCellService {
   public cellAdapter(columns: ITableColumn[], data: any[]): ITableCell<any>[] {
-    return data.map(item => {
+    return data.map((item) => {
       const keys = Object.keys(item);
       const value: ITableCell<any> = {};
       for (const key of keys) {
@@ -22,7 +29,7 @@ export class TableCellService {
    * @returns table cell value
    */
   private cellAdapterByKey(columns: ITableColumn[], data: any, key: string): ITableCellValue<any> {
-    const col = columns.find(item => item.key === key);
+    const col = columns.find((item) => item.key === key);
     if (col && col.cellAdapter) {
       return col.cellAdapter(data[key]);
     }
@@ -49,18 +56,18 @@ export class TableCellService {
   }
 
   /**
- * adapte date column value into a date table cell value
- * @param value current value
- * @returns table cell value
- */
+   * adapte date column value into a date table cell value
+   * @param value current value
+   * @returns table cell value
+   */
   private cellDateAdapter(value: Date): ITableCellValue<Date> {
     return new TableCellValue({ value, displayed: moment(value).format('DD/MM/YYYY HH:mm') });
   }
   /**
- * adapte boolean column value into a date table cell value
- * @param value current value
- * @returns table cell value
- */
+   * adapte boolean column value into a date table cell value
+   * @param value current value
+   * @returns table cell value
+   */
   private cellBooleanAdapter(value: boolean): ITableCellValue<boolean | undefined> {
     let displayed: string = 'non défini';
     if (value === true) {
@@ -70,6 +77,5 @@ export class TableCellService {
       return new TableCellValue({ value, displayed: 'non' });
     }
     return new TableCellValue({ value: undefined, displayed: 'non défini' });
-
   }
 }

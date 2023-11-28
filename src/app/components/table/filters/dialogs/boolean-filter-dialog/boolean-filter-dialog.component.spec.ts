@@ -8,9 +8,8 @@ describe('BooleanFilterDialogComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ BooleanFilterDialogComponent ]
-    })
-    .compileComponents();
+      declarations: [BooleanFilterDialogComponent]
+    }).compileComponents();
 
     fixture = TestBed.createComponent(BooleanFilterDialogComponent);
     component = fixture.componentInstance;

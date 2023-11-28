@@ -1,29 +1,26 @@
-import { Injectable, OnDestroy, OnInit } from "@angular/core";
-import { Subject, Subscription } from "rxjs";
-import { debounceTime } from "rxjs/operators";
-import { ITableFilterValue } from "../../service";
-
+import { Injectable, OnDestroy, OnInit } from '@angular/core';
+import { Subject, Subscription } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
+import { ITableFilterValue } from '../../service';
 
 @Injectable()
 export abstract class FilterDialog<T extends ITableFilterValue> implements OnInit, OnDestroy {
   protected debouncer$ = new Subject<void>();
   protected subscription = new Subscription();
 
-  public data!: { change$: Subject<T>, value: T; };
-
-
-
+  public data!: { change$: Subject<T>; value: T };
 
   /**
    * view init
    */
   ngOnInit(): void {
     if (this.data.change$) {
-      this.subscription.add(this.debouncer$.pipe(debounceTime(350)).subscribe(() => {
-        this.data.change$.next(this.data.value);
-      }));
+      this.subscription.add(
+        this.debouncer$.pipe(debounceTime(350)).subscribe(() => {
+          this.data.change$.next(this.data.value);
+        })
+      );
     }
-
   }
 
   /**

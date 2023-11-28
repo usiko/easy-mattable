@@ -13,9 +13,9 @@ import { TableComponent } from './table.component';
 import { CommonModule } from '@angular/common';
 
 @NgModule({
-    declarations: [TableComponent, MapPipe],
-    imports: [CommonModule, TableMaterialModule, TableFilterModule, TableCellModule],
-    exports: [TableComponent],
-    providers: [],
+  declarations: [TableComponent, MapPipe],
+  imports: [CommonModule, TableMaterialModule, TableFilterModule, TableCellModule],
+  exports: [TableComponent],
+  providers: []
 })
-export class TableModule { }
+export class TableModule {}

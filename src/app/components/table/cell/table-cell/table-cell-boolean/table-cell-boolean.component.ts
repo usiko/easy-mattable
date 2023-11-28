@@ -8,9 +8,7 @@ import { ITableCellValue } from '../../../service';
 })
 export class TableCellBooleanComponent implements OnInit {
   @Input() data?: ITableCellValue<boolean>;
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

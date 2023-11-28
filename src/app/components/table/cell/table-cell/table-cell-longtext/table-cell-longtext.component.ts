@@ -7,10 +7,7 @@ import { ITableCellValue } from '../../../service';
   styleUrls: ['./table-cell-longtext.component.scss']
 })
 export class TableCellLongtextComponent implements OnInit {
-
-  constructor() { }
+  constructor() {}
   @Input() data?: ITableCellValue<string>;
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

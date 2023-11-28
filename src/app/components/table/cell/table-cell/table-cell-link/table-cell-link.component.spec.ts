@@ -8,9 +8,8 @@ describe('TableCellLinkComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TableCellLinkComponent ]
-    })
-    .compileComponents();
+      declarations: [TableCellLinkComponent]
+    }).compileComponents();
 
     fixture = TestBed.createComponent(TableCellLinkComponent);
     component = fixture.componentInstance;
