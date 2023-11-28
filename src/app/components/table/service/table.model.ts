@@ -7,7 +7,7 @@ export interface ITableColumn {
   filterType?: TableFilterTypeEnum;
   cellAdapter?: (data: any) => ITableCellValue<any>;
   cellCSVAdapter?: (data: ITableCellValue<any>) => string;
-  onClick?: (data: ITableCellValue<any>) => void;
+  onClick?: (data: any) => void;
 }
 
 /**
