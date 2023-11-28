@@ -94,6 +94,16 @@ export class TableComponent implements OnInit, AfterViewInit, OnChanges {
         }
     }
 
+    onCellClick(event: MouseEvent, col: ITableColumn, data: any) {
+      if (col.onClick) {
+        col.onClick(data);
+      } else {
+        if (this.rowClickable) {
+          this.clickRow.emit(data);
+        }
+      }
+    }
+
 
     exportcsv(): void {
         const csv = this.tableCSV.getCSV(this.columns, this.dataSource$.getValue().filteredData);

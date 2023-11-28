@@ -1,0 +1,6 @@
+div.clickable {
+    cursor: pointer;
+    &:hover {
+      color: var(--primary);
+    }
+  }

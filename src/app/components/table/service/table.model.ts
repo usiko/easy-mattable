@@ -1,12 +1,13 @@
-export interface ITableColumn {
+export interface ITableColumn<T> {
   label: string;
   key: string;
   type?: TableCellTypeEnum,
   sort?: boolean;
   sortFn?: (data: any) => string;
   filterType?: TableFilterTypeEnum;
-  cellAdapter?: (data: ITableCellValue<any>) => ITableCellValue<any>;
+  cellAdapter?: (data: T) => ITableCellValue<T>;
   cellCSVAdapter?: (data: ITableCellValue<any>) => string;
+  onClick?: (data: ITableCellValue<any>) => void;
 }
 
 

@@ -28,7 +28,12 @@
 
       table {
         width: 100%;
-
+        tr.clickable {
+          cursor: pointer;
+          &:hover {
+            background: whitesmoke;
+          }
+        }
         th {
           >div {
             display: flex;
