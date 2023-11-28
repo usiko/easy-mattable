@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -24,7 +24,9 @@ export class TableComponent implements OnInit, AfterViewInit, OnChanges {
     ];
     @Input() data: any[] = [];
     @Input() pageSizeOptions: number[] = [];
+    @Input() rowClickable = false;
     @Input() exportable: boolean = false;
+    @Output() clickRow = new EventEmitter<any>();
     /** Data used by the table */
     public dataSource$: BehaviorSubject<MatTableDataSource<ITableCell<any>>> = new BehaviorSubject(new MatTableDataSource());
 
