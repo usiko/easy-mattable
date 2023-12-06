@@ -1,32 +1,35 @@
 <!--<h1 mat-dialog-title>Filtre</h1>-->
 <div mat-dialog-content>
-
-	<form [formGroup]="range">
-		<div>
-			<mat-form-field appearance="fill">
-				<mat-label>Début</mat-label>
-				<input matInput [matDatepicker]="startPicker" [max]="range.controls['endDate'].value"
-					formControlName="startDate">
-				<mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
-				<mat-datepicker-toggle matSuffix *ngIf="range.controls['startDate'].value"
-					(click)="clear($event,'startDate')">
-					<mat-icon matDatepickerToggleIcon>clear</mat-icon>
-				</mat-datepicker-toggle>
-				<mat-datepicker #startPicker></mat-datepicker>
-			</mat-form-field>
-		</div>
-		<div>
-			<mat-form-field appearance="fill">
-				<mat-label>Fin</mat-label>
-				<input matInput [matDatepicker]="endPicker" [min]="range.controls['startDate'].value"
-					formControlName="endDate">
-				<mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
-				<mat-datepicker #endPicker></mat-datepicker>
-				<mat-datepicker-toggle matSuffix *ngIf="range.controls['endDate'].value"
-					(click)="clear($event,'endDate')">
-					<mat-icon matDatepickerToggleIcon>clear</mat-icon>
-				</mat-datepicker-toggle>
-			</mat-form-field>
-		</div>
-	</form>
+  <form [formGroup]="range">
+    <div>
+      <mat-form-field appearance="fill">
+        <mat-label>Début</mat-label>
+        <input
+          matInput
+          [matDatepicker]="startPicker"
+          [max]="range.controls['endDate'].value"
+          formControlName="startDate" />
+        <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+        <mat-datepicker-toggle matSuffix *ngIf="range.controls['startDate'].value" (click)="clear($event, 'startDate')">
+          <mat-icon matDatepickerToggleIcon>clear</mat-icon>
+        </mat-datepicker-toggle>
+        <mat-datepicker #startPicker></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="fill">
+        <mat-label>Fin</mat-label>
+        <input
+          matInput
+          [matDatepicker]="endPicker"
+          [min]="range.controls['startDate'].value"
+          formControlName="endDate" />
+        <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+        <mat-datepicker #endPicker></mat-datepicker>
+        <mat-datepicker-toggle matSuffix *ngIf="range.controls['endDate'].value" (click)="clear($event, 'endDate')">
+          <mat-icon matDatepickerToggleIcon>clear</mat-icon>
+        </mat-datepicker-toggle>
+      </mat-form-field>
+    </div>
+  </form>
 </div>

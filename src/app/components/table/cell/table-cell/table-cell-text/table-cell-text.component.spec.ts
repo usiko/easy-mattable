@@ -8,9 +8,8 @@ describe('TableCellTextComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TableCellTextComponent ]
-    })
-    .compileComponents();
+      declarations: [TableCellTextComponent]
+    }).compileComponents();
 
     fixture = TestBed.createComponent(TableCellTextComponent);
     component = fixture.componentInstance;

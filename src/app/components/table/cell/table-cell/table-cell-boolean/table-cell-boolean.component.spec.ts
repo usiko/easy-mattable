@@ -8,9 +8,8 @@ describe('TableCellBooleanComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TableCellBooleanComponent ]
-    })
-    .compileComponents();
+      declarations: [TableCellBooleanComponent]
+    }).compileComponents();
 
     fixture = TestBed.createComponent(TableCellBooleanComponent);
     component = fixture.componentInstance;

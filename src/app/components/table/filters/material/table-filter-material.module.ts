@@ -1,17 +1,15 @@
-import { NgModule } from "@angular/core";
+import { NgModule } from '@angular/core';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatNativeDateModule } from "@angular/material/core";
+import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatIconModule } from "@angular/material/icon";
+import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { MatListModule } from "@angular/material/list";
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
-  declarations: [
-
-  ],
+  declarations: [],
   imports: [
     MatFormFieldModule,
     MatInputModule,
@@ -32,6 +30,6 @@ import { MatListModule } from "@angular/material/list";
     MatIconModule,
     MatListModule
   ],
-  providers: [],
+  providers: []
 })
-export class TableFilterMaterialModule { }
+export class TableFilterMaterialModule {}

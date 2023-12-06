@@ -1,6 +1,6 @@
-import { Injectable } from "@angular/core";
-import * as moment from "moment";
-import { ITableCell, ITableCellValue, ITableColumn, TableCellTypeEnum } from "./table.model";
+import { Injectable } from '@angular/core';
+import * as moment from 'moment';
+import { ITableCell, ITableCellValue, ITableColumn, TableCellTypeEnum } from './table.model';
 
 @Injectable()
 export class TableCSVService {
@@ -8,17 +8,17 @@ export class TableCSVService {
     let csv = '';
     const adapted = this.cellAdapter(columns, rows);
     console.log(adapted);
-    csv += columns.map(col => '"' + col.label + '"').join(',') + "\n";;
+    csv += columns.map((col) => '"' + col.label + '"').join(',') + '\n';
     for (const row of adapted) {
-      csv += columns.map(col => '"' + ((row[col.key]) ? row[col.key] : '') + '"').join(',') + "\n";
+      csv += columns.map((col) => '"' + (row[col.key] ? row[col.key] : '') + '"').join(',') + '\n';
     }
     return csv;
   }
 
-  private cellAdapter(columns: ITableColumn[], data: ITableCell<any>[]): { [key: string]: string; }[] {
-    return data.map(item => {
+  private cellAdapter(columns: ITableColumn[], data: ITableCell<any>[]): { [key: string]: string }[] {
+    return data.map((item) => {
       const keys = Object.keys(item);
-      const value: { [key: string]: string; } = {};
+      const value: { [key: string]: string } = {};
       for (const key of keys) {
         value[key] = this.cellAdapterByKey(columns, item, key);
       }
@@ -33,7 +33,7 @@ export class TableCSVService {
    * @returns table cell value
    */
   private cellAdapterByKey(columns: ITableColumn[], data: ITableCell<any>, key: string): string {
-    const col = columns.find(item => item.key === key);
+    const col = columns.find((item) => item.key === key);
     if (col && col.cellCSVAdapter) {
       return col.cellCSVAdapter(data[key]);
     }
@@ -60,10 +60,10 @@ export class TableCSVService {
   }
 
   /**
- * adapte date column value into a date table cell value
- * @param value current value
- * @returns table cell value
- */
+   * adapte date column value into a date table cell value
+   * @param value current value
+   * @returns table cell value
+   */
   private cellDateAdapter(value: ITableCellValue<Date>): string {
     if (!value?.value) {
       return '';
@@ -71,10 +71,10 @@ export class TableCSVService {
     return moment(value.value).format('DD/MM/YYYY HH:mm');
   }
   /**
- * adapte boolean column value into a date table cell value
- * @param value current value
- * @returns table cell value
- */
+   * adapte boolean column value into a date table cell value
+   * @param value current value
+   * @returns table cell value
+   */
   private cellBooleanAdapter(value: ITableCellValue<Boolean>): string {
     if (value.value === true) {
       return 'oui';
@@ -83,6 +83,5 @@ export class TableCSVService {
       return 'non';
     }
     return 'non défini';
-
   }
 }

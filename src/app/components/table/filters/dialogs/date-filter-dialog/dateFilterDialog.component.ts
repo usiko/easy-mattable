@@ -1,17 +1,15 @@
-import { Component, Inject, OnInit } from "@angular/core";
-import { FormControl, FormGroup } from "@angular/forms";
-import { MAT_DIALOG_DATA } from "@angular/material/dialog";
-import { Subject } from "rxjs";
-import { ITableFilterDateValue } from "../../../service";
-import { FilterDialog } from "../filter-dialog";
-
-
+import { Component, Inject, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Subject } from 'rxjs';
+import { ITableFilterDateValue } from '../../../service';
+import { FilterDialog } from '../filter-dialog';
 
 /** Component used to show all the surveysRun runned by the differents users of the website */
 @Component({
   selector: 'dateFilterDialog',
   styleUrls: ['./dateFilterDialog.component.scss'],
-  templateUrl: './dateFilterDialog.component.html',
+  templateUrl: './dateFilterDialog.component.html'
 })
 
 /** Page for admin : SurveysRun overview */
@@ -21,16 +19,17 @@ export class DateFilterDialog extends FilterDialog<ITableFilterDateValue> implem
     endDate: FormControl<Date | undefined>;
   }> = new FormGroup({
     startDate: new FormControl(),
-    endDate: new FormControl(),
+    endDate: new FormControl()
   });
 
   /**
    * @constructor
    */
-  constructor(@Inject(MAT_DIALOG_DATA) override data: { change$: Subject<ITableFilterDateValue>, value: ITableFilterDateValue; }) {
+  constructor(
+    @Inject(MAT_DIALOG_DATA) override data: { change$: Subject<ITableFilterDateValue>; value: ITableFilterDateValue }
+  ) {
     super();
   }
-
 
   override ngOnInit(): void {
     super.ngOnInit();
@@ -43,25 +42,16 @@ export class DateFilterDialog extends FilterDialog<ITableFilterDateValue> implem
       this.data.value.value = values;
       this.debouncer$.next();
     });
-
-
-
-
   }
 
   clear(event: MouseEvent, formControlName: 'startDate' | 'endDate') {
     event.stopPropagation();
     if (formControlName) {
       this.range.controls[formControlName].setValue(undefined);
-    }
-    else {
+    } else {
       this.range.controls['startDate'].setValue(undefined);
       this.range.controls['endDate'].setValue(undefined);
     }
     this.debouncer$.next();
-
-
   }
-
-
 }

@@ -1,17 +1,26 @@
-import { Injectable } from "@angular/core";
-import { MatTableDataSource } from "@angular/material/table";
-import * as moment from "moment";
-import { BehaviorSubject } from "rxjs";
-import { ITableCell, ITableCellValue, ITableFilter, ITableFilterBooleanValue, ITableFilterDateValue, ITableFilterOptionsValue, ITableFilterTextValue, ITableFilterValue, TableCellValue, TableFilterTypeEnum } from "./table.model";
+import { Injectable } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
+import * as moment from 'moment';
+import { BehaviorSubject } from 'rxjs';
+import {
+  ITableCell,
+  ITableCellValue,
+  ITableFilter,
+  ITableFilterBooleanValue,
+  ITableFilterDateValue,
+  ITableFilterOptionsValue,
+  ITableFilterTextValue,
+  ITableFilterValue,
+  TableCellValue,
+  TableFilterTypeEnum
+} from './table.model';
 
 @Injectable()
 export class TableFilterService<T> {
-
   /**
    * list of object that define filters
    */
   public filtersOptions$ = new BehaviorSubject<ITableFilter<ITableFilterValue>[]>([]);
-
 
   /**
    * @param stringifiedFilter stringified array of ITableFilter
@@ -24,10 +33,8 @@ export class TableFilterService<T> {
       if (!filtering) {
         return false;
       }
-
     }
     return true;
-
   }
 
   /**
@@ -35,18 +42,18 @@ export class TableFilterService<T> {
    */
   public getAllOptForOptFilters(dataSource: MatTableDataSource<ITableCell<any>>) {
     const filters = this.filtersOptions$.getValue();
-    const optionsFilters: ITableFilter<ITableFilterOptionsValue>[] = filters.filter(filter => {
-      return filter.value && (filter.value.type === TableFilterTypeEnum.OPTIONS || filter.value.type === TableFilterTypeEnum.SEARCHOPTIONS);
+    const optionsFilters: ITableFilter<ITableFilterOptionsValue>[] = filters.filter((filter) => {
+      return (
+        filter.value &&
+        (filter.value.type === TableFilterTypeEnum.OPTIONS || filter.value.type === TableFilterTypeEnum.SEARCHOPTIONS)
+      );
     });
     for (const optionsFilter of optionsFilters) {
       if (optionsFilter.value) {
         optionsFilter.value.options = this.getOptForOptFilters(dataSource, optionsFilter.key);
       }
-
     }
   }
-
-
 
   /**
    * apply a filter to data
@@ -82,7 +89,7 @@ export class TableFilterService<T> {
   private getOptForOptFilters(dataSource: MatTableDataSource<ITableCell<any>>, key: string): ITableCellValue<any>[] {
     return dataSource.data.reduce((acc: ITableCellValue<any>[], item) => {
       const itemValue = item[key];
-      const findIndex = acc.findIndex(item => {
+      const findIndex = acc.findIndex((item) => {
         return itemValue && item && item.value === itemValue.value;
       });
       if (findIndex === -1 && itemValue) {
@@ -126,15 +133,13 @@ export class TableFilterService<T> {
       case TableFilterTypeEnum.BOOLEANOPTIONS:
         const booleanFilter: ITableFilterBooleanValue = JSONparsedFilterValue;
 
-
         if (booleanFilter.value) {
-          booleanFilter.value = booleanFilter.value.map(filterValue => {
+          booleanFilter.value = booleanFilter.value.map((filterValue) => {
             if (filterValue !== true && filterValue !== false) {
               return undefined;
             }
             return filterValue;
           });
-
         }
         return booleanFilter;
 
@@ -152,19 +157,15 @@ export class TableFilterService<T> {
       const start = moment(filter.value.startDate);
       const end = moment(filter.value.endDate);
       return value.isAfter(start) && value.isBefore(end);
-    }
-    else if (filter.value?.startDate) {
+    } else if (filter.value?.startDate) {
       const start = moment(filter.value.startDate);
       return value.isAfter(start);
-    }
-    else if (filter.value?.endDate) {
+    } else if (filter.value?.endDate) {
       const end = moment(filter.value.endDate);
       return value.isBefore(end);
     }
     return true;
-
   }
-
 
   /**
    * filtering by option selection
@@ -176,7 +177,6 @@ export class TableFilterService<T> {
    * filtering by boolean selection
    */
   private booleanFilter(filter: ITableFilterBooleanValue, search: any): boolean {
-
     let value = undefined;
     if (search === true) {
       value = true;
@@ -194,11 +194,8 @@ export class TableFilterService<T> {
   private textFilter(filter: ITableFilterTextValue, search: string): boolean {
     if (filter.value) {
       return search.toLowerCase().includes(filter.value.toLowerCase());
-    }
-    else {
+    } else {
       return false;
     }
-
   }
-
 }

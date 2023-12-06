@@ -8,9 +8,8 @@ describe('TableCellDateComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TableCellDateComponent ]
-    })
-    .compileComponents();
+      declarations: [TableCellDateComponent]
+    }).compileComponents();
 
     fixture = TestBed.createComponent(TableCellDateComponent);
     component = fixture.componentInstance;

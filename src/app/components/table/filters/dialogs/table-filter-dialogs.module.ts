@@ -7,22 +7,10 @@ import { OptionsFilterDialog } from './options-filter-dialog/optionsFilterDialog
 import { TextFilterDialog } from './text-filter-dialog/textFilterDialog.component';
 import { BooleanFilterDialogComponent } from './boolean-filter-dialog/boolean-filter-dialog.component';
 
-
-
-
 @NgModule({
   declarations: [DateFilterDialog, TextFilterDialog, OptionsFilterDialog, BooleanFilterDialogComponent],
-  imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    TableFilterMaterialModule
-
-  ],
-  providers: [
-  ],
-  exports: [
-    DateFilterDialog, TextFilterDialog, OptionsFilterDialog
-  ]
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, TableFilterMaterialModule],
+  providers: [],
+  exports: [DateFilterDialog, TextFilterDialog, OptionsFilterDialog]
 })
-export class TableFilterDialogsModule { }
+export class TableFilterDialogsModule {}

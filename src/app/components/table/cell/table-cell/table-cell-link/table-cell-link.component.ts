@@ -7,10 +7,7 @@ import { ITableCellValue } from '../../../service';
   styleUrls: ['./table-cell-link.component.scss']
 })
 export class TableCellLinkComponent implements OnInit {
-
-  constructor() { }
+  constructor() {}
   @Input() data?: ITableCellValue<string>;
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

@@ -8,9 +8,7 @@ import { ITableCellValue } from '../../../service';
 })
 export class TableCellDateComponent implements OnInit {
   @Input() data?: ITableCellValue<Date>;
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

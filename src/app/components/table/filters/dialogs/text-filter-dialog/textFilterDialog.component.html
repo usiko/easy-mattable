@@ -1,12 +1,12 @@
 <!--<h1 mat-dialog-title>Filtre</h1>-->
 <div mat-dialog-content>
-	<div>
-		<mat-form-field appearance="fill">
-			<!--<mat-label>Recherche</mat-label>-->
-			<input matInput [(ngModel)]="data.value.value" (ngModelChange)="onChange()" [placeholder]="'recherche'">
-			<button *ngIf="data.value.value" matSuffix mat-icon-button aria-label="Clear" (click)="clear($event)">
-				<mat-icon>close</mat-icon>
-			</button>
-		</mat-form-field>
-	</div>
+  <div>
+    <mat-form-field appearance="fill">
+      <!--<mat-label>Recherche</mat-label>-->
+      <input matInput [(ngModel)]="data.value.value" (ngModelChange)="onChange()" [placeholder]="'recherche'" />
+      <button *ngIf="data.value.value" matSuffix mat-icon-button aria-label="Clear" (click)="clear($event)">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
 </div>

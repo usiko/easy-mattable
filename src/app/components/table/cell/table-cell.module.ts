@@ -8,12 +8,10 @@ import { TableCellDateComponent } from './table-cell/table-cell-date/table-cell-
 import { CommonModule } from '@angular/common';
 import { TableCellBooleanComponent } from './table-cell/table-cell-boolean/table-cell-boolean.component';
 import { MatIconModule } from '@angular/material/icon';
-
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
-
-
     TableCellComponent,
     TableCellTextComponent,
     TableCellLongtextComponent,
@@ -22,13 +20,8 @@ import { MatIconModule } from '@angular/material/icon';
     TableCellDateComponent,
     TableCellBooleanComponent
   ],
-  imports: [
-    CommonModule,
-    MatIconModule
-  ],
-  exports: [
-    TableCellComponent
-  ],
-  providers: [],
+  imports: [CommonModule, MatIconModule, MatTooltipModule],
+  exports: [TableCellComponent],
+  providers: []
 })
-export class TableCellModule { }
+export class TableCellModule {}

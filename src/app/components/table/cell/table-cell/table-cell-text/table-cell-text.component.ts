@@ -6,10 +6,7 @@ import { ITableCellValue } from '../../../service';
   styleUrls: ['./table-cell-text.component.scss']
 })
 export class TableCellTextComponent implements OnInit {
-
-  constructor() { }
+  constructor() {}
   @Input() data?: ITableCellValue<string>;
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

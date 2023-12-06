@@ -1,21 +1,36 @@
-import { Injectable, OnDestroy } from "@angular/core";
-import { MatPaginator } from "@angular/material/paginator";
-import { MatSort } from "@angular/material/sort";
-import { MatTableDataSource } from "@angular/material/table";
-import { BehaviorSubject, Subscription } from "rxjs";
-import { TableFilterService } from "./table-filter.service";
-import { ITableCell, ITableColumn, ITableFilter, ITableFilterValue, TableBooleanOptionFilter, TableCellAdapter, TableDateFilter, TableFilterTypeEnum, TableOptionsFilter, TableSearchOptionFilter, TableTextFilter } from "./table.model";
-
+import { Injectable, OnDestroy } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { BehaviorSubject, Subscription } from 'rxjs';
+import { TableFilterService } from './table-filter.service';
+import {
+  ITableCell,
+  ITableColumn,
+  ITableFilter,
+  ITableFilterValue,
+  TableBooleanOptionFilter,
+  TableCellAdapter,
+  TableDateFilter,
+  TableFilterTypeEnum,
+  TableOptionsFilter,
+  TableSearchOptionFilter,
+  TableTextFilter
+} from './table.model';
 
 @Injectable()
 export class TableService<T> implements OnDestroy {
-
-  public dataSource$ = new BehaviorSubject<MatTableDataSource<ITableCell<any>>>(new MatTableDataSource<ITableCell<any>>());
+  public dataSource$ = new BehaviorSubject<MatTableDataSource<ITableCell<any>>>(
+    new MatTableDataSource<ITableCell<any>>()
+  );
   private data: T[] = [];
 
   private tableCellAdapter: TableCellAdapter<T, any> = (data: any) => data;
 
-  private filterFunction: (data: ITableCell<any>, filter: string) => boolean = (data: ITableCell<any>, filter: string) => {
+  private filterFunction: (data: ITableCell<any>, filter: string) => boolean = (
+    data: ITableCell<any>,
+    filter: string
+  ) => {
     return this.filterService.dataSourceMultiFiltering(filter, data);
   };
 
@@ -23,9 +38,7 @@ export class TableService<T> implements OnDestroy {
 
   private columns: ITableColumn[] = [];
 
-
-  constructor(private filterService: TableFilterService<T>) { }
-
+  constructor(private filterService: TableFilterService<T>) {}
 
   public getData(): T[] {
     return this.data;
@@ -35,28 +48,24 @@ export class TableService<T> implements OnDestroy {
     return this.filterService.filtersOptions$;
   }
 
-
   /**
    * init data source option and service subscriptions
    */
   public initDataSource() {
     const datasource = this.dataSource$.getValue();
     datasource.filterPredicate = this.filterFunction;
-    this.subscription.add(this.filterService.filtersOptions$.subscribe(filters => {
-      datasource.filter = JSON.stringify(filters);
-      this.filterService.getAllOptForOptFilters(this.dataSource$.getValue());
-
-    }));
+    this.subscription.add(
+      this.filterService.filtersOptions$.subscribe((filters) => {
+        datasource.filter = JSON.stringify(filters);
+        this.filterService.getAllOptForOptFilters(this.dataSource$.getValue());
+      })
+    );
   }
-
-
 
   updateColums(columns: ITableColumn[]) {
     this.columns = columns;
     this.setFilters();
-
   }
-
 
   /**
    * set mat paginator to mat sort
@@ -82,8 +91,7 @@ export class TableService<T> implements OnDestroy {
   setSortingFn(fn: (data: ITableCell<any>, sortHeaderId: string) => string | number) {
     const datasource = this.dataSource$.getValue();
     datasource.sortingDataAccessor = (data: ITableCell<any>, sortHeaderId: string) => {
-
-      const col = this.columns.find(col => col.key === sortHeaderId);
+      const col = this.columns.find((col) => col.key === sortHeaderId);
       if (col && col.sortFn) {
         return col.sortFn(data);
       }
@@ -106,7 +114,6 @@ export class TableService<T> implements OnDestroy {
     this.filterFunction = fn;
   }
 
-
   /**
    * get mat table data source
    */
@@ -122,11 +129,6 @@ export class TableService<T> implements OnDestroy {
     return this.tableCellAdapter(data);
   }
 
-
-
-
-
-
   /**
    * updating current sort on data
    */
@@ -139,8 +141,8 @@ export class TableService<T> implements OnDestroy {
 
   private setFilters() {
     const filters = this.columns
-      .filter(col => !!col.filterType)
-      .map(col => {
+      .filter((col) => !!col.filterType)
+      .map((col) => {
         switch (col.filterType) {
           case TableFilterTypeEnum.DATE:
             return new TableDateFilter({
@@ -171,9 +173,6 @@ export class TableService<T> implements OnDestroy {
       });
     this.filterService.filtersOptions$.next(filters);
   }
-
-
-
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();

@@ -1,45 +1,43 @@
 export interface ITableColumn {
   label: string;
   key: string;
-  type?: TableCellTypeEnum,
+  type?: TableCellTypeEnum;
   sort?: boolean;
   sortFn?: (data: any) => string;
   filterType?: TableFilterTypeEnum;
-  cellAdapter?: (data: ITableCellValue<any>) => ITableCellValue<any>;
+  cellAdapter?: (data: any) => ITableCellValue<any>;
   cellCSVAdapter?: (data: ITableCellValue<any>) => string;
+  onClick?: (data: ITableCell<any>) => void;
 }
-
 
 /**
  * enum of type of filter
  */
 
 export enum TableCellTypeEnum {
-  DATE = "DATE", // will adapt date
-  LONGTEXT = "LONGTEXT", // will show long text
-  LINK = "LINK", // will a clickable link
-  ICON = "ICON", // show an icon
-  BOOLEAN = "BOOLEAN", // shwo boolea value
+  DATE = 'DATE', // will adapt date
+  LONGTEXT = 'LONGTEXT', // will show long text
+  LINK = 'LINK', // will a clickable link
+  ICON = 'ICON', // show an icon
+  BOOLEAN = 'BOOLEAN' // shwo boolea value
 }
-
 
 // cell
 /**
  * table cell value by key
  */
-export type ITableCell<T> = { [key: string]: ITableCellValue<T>; };
+export type ITableCell<T> = { [key: string]: ITableCellValue<T> };
 
 /**
  * table cell adapter function type
  */
 export type TableCellAdapter<T, V> = (data: T[]) => ITableCell<V>[];
 
-
 /**
  * use only for class constuctor
  */
 interface ITableCellValueConstruction<T> {
-  value: T, //real value
+  value: T; //real value
   displayed?: string; // displayed text
 }
 
@@ -50,11 +48,10 @@ export interface ITableCellValue<T> extends ITableCellValueConstruction<T> {
   displayed: string; // displayed text
 }
 
-
 /**
  * table cell value with value and displayed value
  */
-export class TableCellValue<T> implements ITableCellValue<T>{
+export class TableCellValue<T> implements ITableCellValue<T> {
   /**
    * actual data value
    */
@@ -65,10 +62,9 @@ export class TableCellValue<T> implements ITableCellValue<T>{
    */
   displayed: string;
 
-
   constructor(options: ITableCellValueConstruction<T>) {
     this.value = options.value;
-    this.displayed = (options.displayed !== undefined) ? options.displayed : (options.value as any);
+    this.displayed = options.displayed !== undefined ? options.displayed : (options.value as any);
   }
 }
 
@@ -76,11 +72,10 @@ export class TableCellValue<T> implements ITableCellValue<T>{
  * base filter interface
  */
 export interface ITableFilter<ITableFilterValue> {
-
   /**
    * filter value
    */
-  value?: ITableFilterValue,
+  value?: ITableFilterValue;
 
   /**
    * data key where apply filter
@@ -127,7 +122,6 @@ export interface ITableFilterOptionsValue extends ITableFilterValue {
   options?: ITableCellValue<any>[];
 }
 
-
 /**
  * filter boolean options
  */
@@ -138,7 +132,7 @@ export interface ITableFilterBooleanValue extends ITableFilterValue {
   /**
    * selectable option
    */
-  options?: ITableCellValue<(boolean | undefined)>[];
+  options?: ITableCellValue<boolean | undefined>[];
 }
 
 /**
@@ -149,26 +143,22 @@ export interface ITableFilterTextValue extends ITableFilterValue {
   value?: string;
 }
 
-
-
 /**
  * enum of type of filter
  */
 
 export enum TableFilterTypeEnum {
-  TEXT = "text", // will show a search text dropdown
-  OPTIONS = "options",  // will show a selection list dropdown
-  BOOLEANOPTIONS = "boolean options",  // will show  true fall undefined selection
-  SEARCHOPTIONS = "searchoptions",  // will show a selection list dropdown with search
-  DATE = "DATE"  // will show date range dropdown
+  TEXT = 'text', // will show a search text dropdown
+  OPTIONS = 'options', // will show a selection list dropdown
+  BOOLEANOPTIONS = 'boolean options', // will show  true fall undefined selection
+  SEARCHOPTIONS = 'searchoptions', // will show a selection list dropdown with search
+  DATE = 'DATE' // will show date range dropdown
 }
-
 
 /**
  * base table filter class
  */
-abstract class TableFilter<T extends ITableFilterValue> implements ITableFilter<T>
-{
+abstract class TableFilter<T extends ITableFilterValue> implements ITableFilter<T> {
   public key: string;
   public value: T;
   constructor(options: ITableFilter<T>) {
@@ -182,28 +172,24 @@ abstract class TableFilter<T extends ITableFilterValue> implements ITableFilter<
   }
 }
 
-
 /**
  * table filter date, that will show a date range dropdown on header column for filter your data
  */
-export class TableDateFilter extends TableFilter<ITableFilterDateValue> implements ITableFilter<ITableFilterDateValue>
-{
+export class TableDateFilter extends TableFilter<ITableFilterDateValue> implements ITableFilter<ITableFilterDateValue> {
   constructor(options: ITableFilter<ITableFilterDateValue>) {
     super(options);
     this.value.type = TableFilterTypeEnum.DATE;
   }
 
-  override setValueFilter(value: { startDate?: Date, endDate?: Date; }): TableFilter<ITableFilterDateValue> {
+  override setValueFilter(value: { startDate?: Date; endDate?: Date }): TableFilter<ITableFilterDateValue> {
     return super.setValueFilter(value);
   }
 }
 
-
 /**
  * table filter text, that will show a search text dropdown on header column for filter your data
  */
-export class TableTextFilter extends TableFilter<ITableFilterTextValue> implements ITableFilter<ITableFilterTextValue>
-{
+export class TableTextFilter extends TableFilter<ITableFilterTextValue> implements ITableFilter<ITableFilterTextValue> {
   constructor(options: ITableFilter<ITableFilterTextValue>) {
     super(options);
     this.value.type = TableFilterTypeEnum.TEXT;
@@ -217,7 +203,9 @@ export class TableTextFilter extends TableFilter<ITableFilterTextValue> implemen
 /**
  * table filter option, that will show an a list option selection on column header to filter your data
  */
-export class TableOptionsFilter extends TableFilter<ITableFilterOptionsValue> implements ITableFilter<ITableFilterOptionsValue>
+export class TableOptionsFilter
+  extends TableFilter<ITableFilterOptionsValue>
+  implements ITableFilter<ITableFilterOptionsValue>
 {
   constructor(options: ITableFilter<ITableFilterOptionsValue>) {
     super(options);
@@ -238,7 +226,9 @@ export class TableOptionsFilter extends TableFilter<ITableFilterOptionsValue> im
 /**
  * table filter search option, that will show an a searchable list option selection on column header to filter your data
  */
-export class TableSearchOptionFilter extends TableFilter<ITableFilterOptionsValue> implements ITableFilter<ITableFilterOptionsValue>
+export class TableSearchOptionFilter
+  extends TableFilter<ITableFilterOptionsValue>
+  implements ITableFilter<ITableFilterOptionsValue>
 {
   constructor(options: ITableFilter<ITableFilterOptionsValue>) {
     super(options);
@@ -246,11 +236,12 @@ export class TableSearchOptionFilter extends TableFilter<ITableFilterOptionsValu
   }
 }
 
-
 /**
  * table filter boolean, that will show an a boolean list option selection on column header to filter your data
  */
-export class TableBooleanOptionFilter extends TableFilter<ITableFilterBooleanValue> implements ITableFilter<ITableFilterBooleanValue>
+export class TableBooleanOptionFilter
+  extends TableFilter<ITableFilterBooleanValue>
+  implements ITableFilter<ITableFilterBooleanValue>
 {
   constructor(options: ITableFilter<ITableFilterBooleanValue>) {
     super(options);
@@ -268,9 +259,6 @@ export class TableBooleanOptionFilter extends TableFilter<ITableFilterBooleanVal
         value: undefined,
         displayed: 'non défini'
       })
-
     ];
   }
 }
-
-

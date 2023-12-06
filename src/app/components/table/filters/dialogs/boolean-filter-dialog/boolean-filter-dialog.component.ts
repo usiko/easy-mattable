@@ -14,63 +14,64 @@ export class BooleanFilterDialogComponent extends FilterDialog<ITableFilterBoole
 
   public allSelected = false;
 
-
   // current displayd options
   public currentOptions: ITableCellValue<any>[] = [];
 
   public currentValues: (boolean | undefined)[] = [];
   /**
- * @constructor
- */
-  constructor(@Inject(MAT_DIALOG_DATA) override   data: { change$: Subject<ITableFilterBooleanValue>, value: ITableFilterBooleanValue; }) {
+   * @constructor
+   */
+  constructor(
+    @Inject(MAT_DIALOG_DATA)
+    override data: { change$: Subject<ITableFilterBooleanValue>; value: ITableFilterBooleanValue }
+  ) {
     super();
   }
-  override  ngOnInit(): void {
+  override ngOnInit(): void {
     if (!this.data.value.value) {
       this.data.value.value = [];
     }
     if (this.data.change$) {
-      this.subscription.add(this.debouncer$.pipe(debounceTime(350)).subscribe(() => {
-        if (!this.data.value.value) {
-          this.data.value.value = [];
-        }
-        // remove current working values
-        const allValues = this.data.value.value.filter((value: any) => !this.currentOptions.map(item => item.value).includes(value));
-        // add new values
-        allValues.push(...this.currentValues);
+      this.subscription.add(
+        this.debouncer$.pipe(debounceTime(350)).subscribe(() => {
+          if (!this.data.value.value) {
+            this.data.value.value = [];
+          }
+          // remove current working values
+          const allValues = this.data.value.value.filter(
+            (value: any) => !this.currentOptions.map((item) => item.value).includes(value)
+          );
+          // add new values
+          allValues.push(...this.currentValues);
 
-        this.data.value.value = allValues;
-        this.data.change$.next(this.data.value);
-      }));
+          this.data.value.value = allValues;
+          this.data.change$.next(this.data.value);
+        })
+      );
     }
-    this.currentOptions = [...this.data.value.options || []].sort();
+    this.currentOptions = [...(this.data.value.options || [])].sort();
     this.currentValues = [...this.data.value.value];
     this.updateAllSelect();
   }
-
-
 
   allSelectToggle(event: MouseEvent) {
     event.preventDefault();
     event.stopPropagation();
     if (this.allSelected) {
       this.data.value.value = [];
-    }
-    else {
-      this.data.value.value = this.data.value.options?.map(item => item.value) || [];
+    } else {
+      this.data.value.value = this.data.value.options?.map((item) => item.value) || [];
     }
     this.onChange();
     this.updateAllSelect();
   }
 
   updateAllSelect() {
-    this.allSelected = this.currentOptions.findIndex((option) => {
-      return !this.currentValues.includes(option.value);
-    }) === -1;
+    this.allSelected =
+      this.currentOptions.findIndex((option) => {
+        return !this.currentValues.includes(option.value);
+      }) === -1;
   }
 
-  clear(event: PointerEvent, param?: string | undefined) {
-
-  }
-
+  clear(event: PointerEvent, param?: string | undefined) {}
 }

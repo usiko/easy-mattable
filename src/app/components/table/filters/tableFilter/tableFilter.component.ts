@@ -1,26 +1,30 @@
-import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from "@angular/core";
-import { MatDialog } from "@angular/material/dialog";
-import { MatTableDataSource } from "@angular/material/table";
+import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { MatTableDataSource } from '@angular/material/table';
 
-import { Subject, Subscription } from "rxjs";
-import { take } from "rxjs/operators";
-import { ITableCell, ITableFilter, ITableFilterDateValue, ITableFilterOptionsValue, ITableFilterTextValue, ITableFilterValue, TableFilterTypeEnum } from "../../";
-import { ITableFilterBooleanValue, TableService } from "../../service";
-import { TextFilterDialog, DateFilterDialog, OptionsFilterDialog, BooleanFilterDialogComponent } from "../dialogs";
-
-
-
+import { Subject, Subscription } from 'rxjs';
+import { take } from 'rxjs/operators';
+import {
+  ITableCell,
+  ITableFilter,
+  ITableFilterDateValue,
+  ITableFilterOptionsValue,
+  ITableFilterTextValue,
+  ITableFilterValue,
+  TableFilterTypeEnum
+} from '../../';
+import { ITableFilterBooleanValue, TableService } from '../../service';
+import { TextFilterDialog, DateFilterDialog, OptionsFilterDialog, BooleanFilterDialogComponent } from '../dialogs';
 
 /** Component used to show all the surveysRun runned by the differents users of the website */
 @Component({
   selector: 'tableFilter',
   styleUrls: ['./tableFilter.component.scss'],
-  templateUrl: './tableFilter.component.html',
+  templateUrl: './tableFilter.component.html'
 })
 
 /** Page for admin : SurveysRun overview */
 export class TableFilterComponent implements OnChanges, OnInit, OnDestroy {
-
   /**
    * table data
    */
@@ -39,8 +43,6 @@ export class TableFilterComponent implements OnChanges, OnInit, OnDestroy {
   currentFilter?: ITableFilter<ITableFilterValue>;
   dialogOpen = false;
 
-
-
   private afterClosedSub!: Subscription;
   private setFilterSub!: Subscription;
 
@@ -49,14 +51,17 @@ export class TableFilterComponent implements OnChanges, OnInit, OnDestroy {
   /**
    * @constructor
    */
-  constructor(private tableService: TableService<any>, public dialog: MatDialog) {
-
-  }
+  constructor(
+    private tableService: TableService<any>,
+    public dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
-    this.subscription.add(this.tableService.getFilters().subscribe((filters: ITableFilter<any>[]) => {
-      this.getCurrentFilter();
-    }));
+    this.subscription.add(
+      this.tableService.getFilters().subscribe((filters: ITableFilter<any>[]) => {
+        this.getCurrentFilter();
+      })
+    );
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -84,7 +89,7 @@ export class TableFilterComponent implements OnChanges, OnInit, OnDestroy {
     if (this.setFilterSub) {
       this.setFilterSub.unsubscribe();
     }
-    this.setFilterSub = subject.subscribe(value => {
+    this.setFilterSub = subject.subscribe((value) => {
       this.setFilter(value);
     });
     const component: any = this.getDialogComponent();
@@ -105,9 +110,12 @@ export class TableFilterComponent implements OnChanges, OnInit, OnDestroy {
     if (this.afterClosedSub) {
       this.afterClosedSub.unsubscribe();
     }
-    this.afterClosedSub = dialog.afterClosed().pipe(take(1)).subscribe(() => {
-      this.dialogOpen = false;
-    });
+    this.afterClosedSub = dialog
+      .afterClosed()
+      .pipe(take(1))
+      .subscribe(() => {
+        this.dialogOpen = false;
+      });
   }
 
   /**
@@ -147,8 +155,6 @@ export class TableFilterComponent implements OnChanges, OnInit, OnDestroy {
    */
   private setFilter(value: ITableFilterValue) {
     if (this.currentFilter) {
-
-
       this.currentFilter.value = this.handleEmptyValues(value);
 
       this.tableService.getFilters().next(this.tableService.getFilters().getValue());
@@ -189,7 +195,6 @@ export class TableFilterComponent implements OnChanges, OnInit, OnDestroy {
     }
   }
 
-
   ngOnDestroy(): void {
     if (this.setFilterSub) {
       this.setFilterSub.unsubscribe();
@@ -199,6 +204,4 @@ export class TableFilterComponent implements OnChanges, OnInit, OnDestroy {
     }
     this.subscription.unsubscribe();
   }
-
-
 }

@@ -8,9 +8,8 @@ describe('TableCellIconComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TableCellIconComponent ]
-    })
-    .compileComponents();
+      declarations: [TableCellIconComponent]
+    }).compileComponents();
 
     fixture = TestBed.createComponent(TableCellIconComponent);
     component = fixture.componentInstance;

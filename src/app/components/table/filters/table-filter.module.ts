@@ -4,21 +4,10 @@ import { TableFilterDialogsModule } from './dialogs';
 import { TableFilterMaterialModule } from './';
 import { TableFilterComponent } from './';
 
-
-
-
 @NgModule({
   declarations: [TableFilterComponent],
-  imports: [
-    CommonModule,
-    TableFilterDialogsModule,
-    TableFilterMaterialModule
-
-  ],
-  providers: [
-  ],
-  exports: [
-    TableFilterComponent
-  ]
+  imports: [CommonModule, TableFilterDialogsModule, TableFilterMaterialModule],
+  providers: [],
+  exports: [TableFilterComponent]
 })
-export class TableFilterModule { }
+export class TableFilterModule {}

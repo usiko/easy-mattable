@@ -1,17 +1,17 @@
 .mat-form-field {
-	width: 200px;
-	//margin: 0 5px;
+  width: 200px;
+  //margin: 0 5px;
 }
 
 mat-datepicker-toggle {
-	display: inline-block;
+  display: inline-block;
 }
 
 :host {
-	display: block;
-	background: white;
+  display: block;
+  background: white;
 
-	form {
-		padding: 10px;
-	}
+  form {
+    padding: 10px;
+  }
 }
