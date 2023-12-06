@@ -11,7 +11,7 @@ import {
   ViewChild
 } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
+import { MatSort, SortDirection } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { BehaviorSubject } from 'rxjs';
 import { TableFilterService } from './service';
@@ -30,7 +30,9 @@ export class TableComponent implements OnInit, AfterViewInit, OnChanges {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   @Input() columns: ITableColumn[] = [];
-  @Input() data: any[] = [];
+    @Input() data: any[] = [];
+    @Input() activeSort? : {name:string, direction:SortDirection}
+    //matSortActive="name" matSortDirection="asc"
   @Input() pageSizeOptions: number[] = [];
   @Input() rowClickable = false;
   @Input() exportable: boolean = false;

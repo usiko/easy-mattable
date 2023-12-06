@@ -51,6 +51,7 @@ export class AppComponent implements OnInit {
     {
       label: 'Nom',
       key: 'name',
+      sort: true,
       filterType: TableFilterTypeEnum.TEXT,
       cellAdapter: (data: string) => {
         console.log('regular', data);
