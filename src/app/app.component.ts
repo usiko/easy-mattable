@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import * as moment from 'moment';
-import { ITableCellValue, ITableColumn, TableCellTypeEnum, TableFilterTypeEnum } from './components/table';
+import {
+  ITableBottomButton,
+  ITableCellValue,
+  ITableColumn,
+  TableCellTypeEnum,
+  TableFilterTypeEnum
+} from './components/table';
 
 @Component({
   selector: 'app-root',
@@ -34,6 +40,29 @@ export class AppComponent implements OnInit {
   ];
 
   public mock: any[] = [];
+
+  public bottomButtons: ITableBottomButton[] = [
+    {
+      id: 'add',
+      icon: 'add',
+      label: 'Ajouter',
+      tooltip: 'ajouter de la donnée'
+    },
+    {
+      id: 'add2',
+      icon: 'add',
+      label: 'Ajouter'
+    },
+    {
+      id: 'add3',
+      icon: 'add'
+    },
+    {
+      id: 'add4',
+      label: 'Ajouter',
+      tooltip: 'ajouter de la donnée'
+    }
+  ];
 
   public columns: ITableColumn[] = [
     {
@@ -100,5 +129,9 @@ export class AppComponent implements OnInit {
         date: moment().add(index, 'day').toDate()
       };
     });
+  }
+
+  onbottomButtonClick(id: string) {
+    console.log(id);
   }
 }

@@ -17,7 +17,7 @@ import { BehaviorSubject } from 'rxjs';
 import { TableFilterService } from './service';
 import { TableCellService } from './service/table-cell.service';
 import { TableCSVService } from './service/table-csv.service';
-import { ITableCell, ITableColumn, TableCellTypeEnum } from './service/table.model';
+import { ITableBottomButton, ITableCell, ITableColumn, TableCellTypeEnum } from './service/table.model';
 import { TableService } from './service/table.service';
 
 @Component({
@@ -29,14 +29,17 @@ import { TableService } from './service/table.service';
 export class TableComponent implements OnInit, AfterViewInit, OnChanges {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+
   @Input() columns: ITableColumn[] = [];
-    @Input() data: any[] = [];
-    @Input() activeSort? : {name:string, direction:SortDirection}
-    //matSortActive="name" matSortDirection="asc"
+  @Input() data: any[] = [];
+  @Input() activeSort?: { name: string; direction: SortDirection };
+  //matSortActive="name" matSortDirection="asc"
   @Input() pageSizeOptions: number[] = [];
   @Input() rowClickable = false;
   @Input() exportable: boolean = false;
+  @Input() bottomButtons: ITableBottomButton[] = [];
   @Output() clickRow = new EventEmitter<any>();
+  @Output() bottomButtonClick = new EventEmitter<string>();
   /** Data used by the table */
   public dataSource$: BehaviorSubject<MatTableDataSource<ITableCell<any>>> = new BehaviorSubject(
     new MatTableDataSource()
@@ -111,6 +114,10 @@ export class TableComponent implements OnInit, AfterViewInit, OnChanges {
         this.clickRow.emit(data);
       }
     }
+  }
+
+  onBottomButtonClick(id: string) {
+    this.bottomButtonClick.emit(id);
   }
 
   exportcsv(): void {

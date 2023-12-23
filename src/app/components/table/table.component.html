@@ -26,9 +26,23 @@
         </table>
     </div>
     <div class="bottom">
-        <button *ngIf="exportable" (click)="exportcsv()" mat-button>
-      <mat-icon>file_download</mat-icon>
-    </button>
+        <ng-container *ngIf="exportable">
+            <button (click)="exportcsv()" mat-button [matTooltip]="'csv'">
+                <mat-icon>file_download</mat-icon>
+            </button>
+        </ng-container>
+        <ng-container *ngIf="bottomButtons && bottomButtons.length>0">
+            <ng-container *ngFor="let button of bottomButtons">
+                <button *ngIf="button.tooltip" (click)="onBottomButtonClick(button.id)" mat-button [matTooltip]="button.tooltip">
+                    <mat-icon *ngIf="button.icon">{{button.icon}}</mat-icon>
+                    <ng-container *ngIf="button.label" >{{button.label}}</ng-container>
+                </button>
+                <button *ngIf="!button.tooltip" (click)="onBottomButtonClick(button.id)" mat-button>
+                    <mat-icon *ngIf="button.icon">{{button.icon}}</mat-icon>
+                    <ng-container *ngIf="button.label" >{{button.label}}</ng-container>
+                </button>
+            </ng-container>
+        </ng-container>
         <mat-paginator [pageSizeOptions]="pageSizeOptions" showFirstLastButtons aria-label="Select page of periodic elements">
         </mat-paginator>
     </div>

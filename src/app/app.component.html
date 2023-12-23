@@ -1,3 +1,3 @@
 <div class="table-container">
-    <app-table [columns]="columns" [activeSort]="{name:'name', direction:'desc'}" [exportable]="true" [pageSizeOptions]="[20, 50, 100]" [data]="mock"></app-table>
+    <app-table [bottomButtons]="bottomButtons" [columns]="columns" [activeSort]="{name:'name', direction:'desc'}" [exportable]="true" [pageSizeOptions]="[20, 50, 100]" [data]="mock" (bottomButtonClick)="onbottomButtonClick($event)"></app-table>
 </div>

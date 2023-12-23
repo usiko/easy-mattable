@@ -262,3 +262,10 @@ export class TableBooleanOptionFilter
     ];
   }
 }
+
+export interface ITableBottomButton {
+  id: string;
+  icon?: string;
+  label?: string;
+  tooltip?: string;
+}
